@@ -701,7 +701,7 @@ function generateClause3() {
         }),
         
         new Paragraph({
-            text: "The Head Company must attach as Annexure "A" to its counterpart of this Agreement any:",
+            text: 'The Head Company must attach as Annexure "A" to its counterpart of this Agreement any:',
             spacing: { after: 100 }
         }),
         
