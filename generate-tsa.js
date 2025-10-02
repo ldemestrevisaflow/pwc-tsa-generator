@@ -1,3 +1,5 @@
+const { Document, Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, UnderlineType, WidthType, BorderStyle, HeadingLevel, TabStopType, TabStopPosition, Packer } = docx;
+
 // PwC Tax Sharing Agreement Generator
 // Template ID 3082 - Division 721 ITAA 1997 Compliant
 // Last Updated: 2025
