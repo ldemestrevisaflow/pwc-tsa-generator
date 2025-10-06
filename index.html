@@ -3,427 +3,1064 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Sharing Agreement Generator - PwC</title>
+    <title>PwC Tax Sharing Agreement Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
+        
         .container {
             max-width: 900px;
             margin: 0 auto;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-
+        
         .header {
-            background: linear-gradient(135deg, #d93a00 0%, #ff6b35 100%);
+            background: linear-gradient(135deg, #D04A02 0%, #ff6b35 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
         }
-
+        
         .header h1 {
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 10px;
+            font-weight: 600;
         }
-
+        
         .header p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 16px;
+            opacity: 0.95;
         }
-
-        .form-container {
+        
+        .content {
             padding: 40px;
         }
-
+        
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
-
-        .section-title {
+        
+        .section h2 {
+            color: #D04A02;
             font-size: 20px;
-            color: #333;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #d93a00;
+            border-bottom: 2px solid #f0f0f0;
         }
-
+        
         .form-group {
             margin-bottom: 20px;
         }
-
-        .form-group label {
+        
+        label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #555;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            color: #333;
+            font-weight: 500;
             font-size: 14px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
             font-family: inherit;
-            transition: border-color 0.3s;
         }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        
+        input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #d93a00;
+            border-color: #D04A02;
+            box-shadow: 0 0 0 3px rgba(208, 74, 2, 0.1);
         }
-
-        .form-group textarea {
+        
+        textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 100px;
         }
-
-        .required {
-            color: #d93a00;
-            margin-left: 3px;
-        }
-
-        .member-card {
+        
+        .member-list {
             background: #f8f9fa;
             padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            border: 1px solid #dee2e6;
-            position: relative;
+            border-radius: 10px;
+            margin-top: 15px;
         }
-
-        .member-card-header {
+        
+        .member-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-
-        .member-card-header h4 {
+        
+        .member-info {
+            flex: 1;
+        }
+        
+        .member-name {
+            font-weight: 600;
             color: #333;
-            font-size: 16px;
+            margin-bottom: 4px;
         }
-
-        .remove-member-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            line-height: 1;
-            transition: background 0.3s;
+        
+        .member-abn {
+            font-size: 13px;
+            color: #666;
         }
-
-        .remove-member-btn:hover {
-            background: #c82333;
-        }
-
+        
         .btn {
             padding: 12px 30px;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-
+        
         .btn-primary {
-            background: #d93a00;
+            background: linear-gradient(135deg, #D04A02 0%, #ff6b35 100%);
             color: white;
         }
-
+        
         .btn-primary:hover {
-            background: #c23300;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(217, 58, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(208, 74, 2, 0.3);
         }
-
+        
         .btn-secondary {
             background: #6c757d;
             color: white;
         }
-
+        
         .btn-secondary:hover {
             background: #5a6268;
         }
-
-        .btn-container {
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .button-group {
             display: flex;
             gap: 15px;
             margin-top: 30px;
         }
-
-        #addMemberBtn {
-            margin-top: 15px;
-        }
-
-        #apiStatus {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            z-index: 1000;
+        
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             display: none;
-            animation: slideIn 0.3s ease-out;
         }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        #apiStatus.success {
-            background-color: #d4edda;
+        
+        .alert-success {
+            background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-
-        #apiStatus.error {
-            background-color: #f8d7da;
+        
+        .alert-error {
+            background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-
-        .loading-spinner {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
+        
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
         }
-
-        .loading-spinner.active {
+        
+        .checkbox-group {
             display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
-
-        .loading-content {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .loading {
+            display: none;
             text-align: center;
+            padding: 20px;
         }
-
+        
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #d93a00;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #D04A02;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto;
         }
-
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        .loading-content p {
-            font-size: 18px;
-            color: #333;
-            margin: 0;
-        }
-
-        .info-box {
-            background: #e7f3ff;
-            border-left: 4px solid #2196F3;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .info-box p {
-            margin: 0;
-            color: #0c5460;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .form-container {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 24px;
-            }
-
-            .btn-container {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- API Status Indicator -->
-    <div id="apiStatus"></div>
-
-    <!-- Loading Spinner -->
-    <div id="loadingIndicator" class="loading-spinner">
-        <div class="loading-content">
-            <div class="spinner"></div>
-            <p>Generating your Tax Sharing Agreement...</p>
-            <p style="font-size: 14px; color: #666; margin-top: 10px;">This may take a few moments</p>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <h1>Tax Sharing Agreement Generator</h1>
-            <p>PwC Australia - Generate compliant TSA documents</p>
+            <h1>🏢 Tax Sharing Agreement Generator</h1>
+            <p>PwC Professional Document Generation Tool</p>
         </div>
-
-        <!-- Form -->
-        <div class="form-container">
+        
+        <div class="content">
+            <div class="alert alert-success" id="successAlert"></div>
+            <div class="alert alert-error" id="errorAlert"></div>
+            <div class="alert alert-info" id="infoAlert"></div>
+            
             <form id="tsaForm">
-                <!-- Head Company Section -->
                 <div class="section">
-                    <h2 class="section-title">Head Company Details</h2>
-                    
+                    <h2>📋 Head Company Details</h2>
                     <div class="form-group">
-                        <label for="headCompanyName">Company Name <span class="required">*</span></label>
-                        <input type="text" id="headCompanyName" name="headCompanyName" required placeholder="Enter head company name">
+                        <label for="headCompanyName">Head Company Name *</label>
+                        <input type="text" id="headCompanyName" required 
+                               placeholder="e.g., ABC Holdings Pty Ltd">
                     </div>
-
                     <div class="form-group">
-                        <label for="headCompanyABN">ABN <span class="required">*</span></label>
-                        <input type="text" id="headCompanyABN" name="headCompanyABN" required placeholder="12 345 678 901">
+                        <label for="headCompanyABN">Head Company ABN *</label>
+                        <input type="text" id="headCompanyABN" required 
+                               placeholder="e.g., 12 345 678 901"
+                               pattern="[0-9\s]{11,14}"
+                               title="Please enter a valid ABN (11 digits)">
                     </div>
-
                     <div class="form-group">
-                        <label for="headCompanyACN">ACN</label>
-                        <input type="text" id="headCompanyACN" name="headCompanyACN" placeholder="123 456 789">
+                        <label for="headCompanyAddress">Head Company Address *</label>
+                        <textarea id="headCompanyAddress" required 
+                                  placeholder="123 Business Street, Sydney NSW 2000"></textarea>
                     </div>
-
                     <div class="form-group">
-                        <label for="headCompanyAddress">Registered Address</label>
-                        <textarea id="headCompanyAddress" name="headCompanyAddress" rows="3" placeholder="Enter registered address"></textarea>
+                        <label for="headCompanyEmail">Head Company Email *</label>
+                        <input type="email" id="headCompanyEmail" required 
+                               placeholder="secretary@company.com.au">
+                    </div>
+                    <div class="form-group">
+                        <label for="companySecretary">Company Secretary Name</label>
+                        <input type="text" id="companySecretary" 
+                               placeholder="John Smith">
                     </div>
                 </div>
 
-                <!-- Contributing Members Section -->
                 <div class="section">
-                    <h2 class="section-title">Contributing Members</h2>
-                    
-                    <div class="info-box">
-                        <p>Add all subsidiary companies that are part of the tax consolidated group.</p>
-                    </div>
-
-                    <div id="contributingMembersContainer">
-                        <!-- Member cards will be added here dynamically -->
-                        <div class="member-card">
-                            <div class="member-card-header">
-                                <h4>Contributing Member 1</h4>
-                                <button type="button" class="remove-member-btn" title="Remove this member">×</button>
-                            </div>
-                            <div class="form-group">
-                                <label>Company Name <span class="required">*</span></label>
-                                <input type="text" name="memberName0" required placeholder="Enter company name">
-                            </div>
-                            <div class="form-group">
-                                <label>ABN <span class="required">*</span></label>
-                                <input type="text" name="memberABN0" required placeholder="98 765 432 109">
-                            </div>
-                            <div class="form-group">
-                                <label>ACN</label>
-                                <input type="text" name="memberACN0" placeholder="987 654 321">
-                            </div>
-                            <div class="form-group">
-                                <label>Registered Address</label>
-                                <textarea name="memberAddress0" rows="3" placeholder="Enter registered address"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="button" id="addMemberBtn" class="btn btn-secondary">+ Add Another Member</button>
-                </div>
-
-                <!-- Agreement Details Section -->
-                <div class="section">
-                    <h2 class="section-title">Agreement Details</h2>
-
+                    <h2>📅 Agreement Details</h2>
                     <div class="form-group">
-                        <label for="agreementDate">Agreement Date <span class="required">*</span></label>
-                        <input type="text" id="agreementDate" name="agreementDate" required placeholder="1 October 2025">
+                        <label for="consolidationDate">Date of Consolidation *</label>
+                        <input type="date" id="consolidationDate" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="commencementDate">Commencement Date</label>
-                        <input type="text" id="commencementDate" name="commencementDate" placeholder="1 July 2025">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="endDate">End Date</label>
-                        <input type="text" id="endDate" name="endDate" placeholder="30 June 2026">
-                    </div>
-                </div>
-
-                <!-- Tax Details Section -->
-                <div class="section">
-                    <h2 class="section-title">Tax Details</h2>
-
-                    <div class="form-group">
-                        <label for="consolidatedGroupDetails">Consolidated Group Details</label>
-                        <textarea id="consolidatedGroupDetails" name="consolidatedGroupDetails" rows="3" placeholder="Tax Consolidated Group under Division 703"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fundingMethod">Tax Funding Method</label>
-                        <select id="fundingMethod" name="fundingMethod">
-                            <option value="Stand-alone tax liability method">Stand-alone tax liability method</option>
-                            <option value="Group allocation method">Group allocation method</option>
-                            <option value="Alternative method">Alternative method</option>
+                        <label for="groupType">Group Type *</label>
+                        <select id="groupType" required>
+                            <option value="consolidated">Consolidated Group</option>
+                            <option value="mec">Multiple Entry Consolidated (MEC) Group</option>
+                            <option value="mec-conversion">MEC Group (Special Conversion)</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="allocationBasis">Allocation Basis for Item 3 *</label>
+                        <select id="allocationBasis" required>
+                            <option value="taxation">Notional Taxation Basis</option>
+                            <option value="accounting">Notional Accounting Basis</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jurisdiction">Governing Law Jurisdiction *</label>
+                        <select id="jurisdiction" required>
+                            <option value="New South Wales">New South Wales</option>
+                            <option value="Victoria">Victoria</option>
+                            <option value="Queensland">Queensland</option>
+                            <option value="South Australia">South Australia</option>
+                            <option value="Western Australia">Western Australia</option>
+                            <option value="Tasmania">Tasmania</option>
+                        </select>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="hasPriorTSA">
+                        <label for="hasPriorTSA">Has Prior Tax Sharing Agreement</label>
+                    </div>
                 </div>
 
-                <!-- Submit Button -->
-                <div class="btn-container">
-                    <button type="submit" class="btn btn-primary">Generate TSA Document</button>
+                <div class="section">
+                    <h2>👥 Contributing Members</h2>
+                    <div class="form-group">
+                        <label for="memberName">Member Name</label>
+                        <input type="text" id="memberName" placeholder="Member Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="memberABN">Member ABN</label>
+                        <input type="text" id="memberABN" placeholder="12 345 678 901">
+                    </div>
+                    <div class="form-group">
+                        <label for="memberAddress">Member Address & Email</label>
+                        <textarea id="memberAddress" placeholder="Address and email"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addMember()">
+                        ➕ Add Member
+                    </button>
+                    
+                    <div class="member-list" id="memberList" style="display: none;">
+                        <h3 style="margin-bottom: 15px; color: #333;">Added Members:</h3>
+                        <div id="membersContainer"></div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">
+                        📄 Generate TSA Document
+                    </button>
                 </div>
             </form>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 15px; color: #666;">Generating your document...</p>
+            </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="generate-tsa-api.js"></script>
+    <script>
+        const members = [];
+
+        function showAlert(type, message) {
+            const alertId = type === 'success' ? 'successAlert' : 
+                           type === 'error' ? 'errorAlert' : 'infoAlert';
+            const alert = document.getElementById(alertId);
+            alert.textContent = message;
+            alert.style.display = 'block';
+            setTimeout(() => alert.style.display = 'none', 5000);
+        }
+
+        function addMember() {
+            const name = document.getElementById('memberName').value.trim();
+            const abn = document.getElementById('memberABN').value.trim();
+            const address = document.getElementById('memberAddress').value.trim();
+
+            if (!name || !abn) {
+                showAlert('error', 'Please enter member name and ABN');
+                return;
+            }
+
+            members.push({ name, abn, address });
+            
+            document.getElementById('memberName').value = '';
+            document.getElementById('memberABN').value = '';
+            document.getElementById('memberAddress').value = '';
+            
+            updateMemberList();
+            showAlert('success', 'Member added successfully');
+        }
+
+        function removeMember(index) {
+            members.splice(index, 1);
+            updateMemberList();
+            showAlert('info', 'Member removed');
+        }
+
+        function updateMemberList() {
+            const container = document.getElementById('membersContainer');
+            const listDiv = document.getElementById('memberList');
+            
+            if (members.length === 0) {
+                listDiv.style.display = 'none';
+                return;
+            }
+            
+            listDiv.style.display = 'block';
+            container.innerHTML = members.map((member, index) => `
+                <div class="member-item">
+                    <div class="member-info">
+                        <div class="member-name">${member.name}</div>
+                        <div class="member-abn">ABN: ${member.abn}</div>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="removeMember(${index})">
+                        Remove
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('tsaForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('tsaForm').style.display = 'none';
+            
+            try {
+                const formData = {
+                    headCompanyName: document.getElementById('headCompanyName').value,
+                    headCompanyABN: document.getElementById('headCompanyABN').value,
+                    headCompanyAddress: document.getElementById('headCompanyAddress').value,
+                    headCompanyEmail: document.getElementById('headCompanyEmail').value,
+                    companySecretary: document.getElementById('companySecretary').value || 'Company Secretary',
+                    consolidationDate: document.getElementById('consolidationDate').value,
+                    groupType: document.getElementById('groupType').value,
+                    allocationBasis: document.getElementById('allocationBasis').value,
+                    jurisdiction: document.getElementById('jurisdiction').value,
+                    hasPriorTSA: document.getElementById('hasPriorTSA').checked,
+                    members: members
+                };
+
+                await generateTSA(formData);
+                
+                showAlert('success', 'TSA Document generated successfully!');
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('error', 'Error generating document: ' + error.message);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('tsaForm').style.display = 'block';
+            }
+        });
+
+        async function generateTSA(data) {
+            const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
+                    AlignmentType, WidthType, BorderStyle, HeadingLevel, PageBreak,
+                    TabStopType, TabStopPosition, UnderlineType, LevelFormat } = docx;
+
+            // Create document with PwC styling
+            const doc = new Document({
+                styles: {
+                    default: {
+                        document: {
+                            run: { font: "Georgia", size: 20 } // 10pt default
+                        }
+                    },
+                    paragraphStyles: [
+                        {
+                            id: "Normal",
+                            name: "Normal",
+                            run: { font: "Georgia", size: 20 }, // 10pt
+                            paragraph: { spacing: { line: 280, before: 120, after: 120 } }
+                        },
+                        {
+                            id: "Heading1",
+                            name: "Heading 1",
+                            basedOn: "Normal",
+                            next: "Normal",
+                            run: { font: "Georgia", size: 22, bold: true }, // 11pt
+                            paragraph: { spacing: { before: 360, after: 180 }, outlineLevel: 0 }
+                        },
+                        {
+                            id: "Heading2",
+                            name: "Heading 2",
+                            basedOn: "Normal",
+                            next: "Normal",
+                            run: { font: "Georgia", size: 20, bold: true, italics: true }, // 10pt
+                            paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 1 }
+                        },
+                        {
+                            id: "Heading3",
+                            name: "Heading 3",
+                            basedOn: "Normal",
+                            next: "Normal",
+                            run: { font: "Georgia", size: 20, italics: true }, // 10pt
+                            paragraph: { spacing: { before: 120, after: 120 }, outlineLevel: 2 }
+                        }
+                    ]
+                },
+                numbering: {
+                    config: [
+                        {
+                            reference: "decimal-list",
+                            levels: [
+                                { level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT,
+                                  style: { paragraph: { indent: { left: 720, hanging: 360 } } } }
+                            ]
+                        },
+                        {
+                            reference: "lower-alpha-list",
+                            levels: [
+                                { level: 0, format: LevelFormat.LOWER_LETTER, text: "%1.", alignment: AlignmentType.LEFT,
+                                  style: { paragraph: { indent: { left: 1080, hanging: 360 } } } }
+                            ]
+                        },
+                        {
+                            reference: "lower-roman-list",
+                            levels: [
+                                { level: 0, format: LevelFormat.LOWER_ROMAN, text: "%1.", alignment: AlignmentType.LEFT,
+                                  style: { paragraph: { indent: { left: 1440, hanging: 360 } } } }
+                            ]
+                        },
+                        {
+                            reference: "upper-alpha-list",
+                            levels: [
+                                { level: 0, format: LevelFormat.UPPER_LETTER, text: "%1.", alignment: AlignmentType.LEFT,
+                                  style: { paragraph: { indent: { left: 2160, hanging: 360 } } } }
+                            ]
+                        }
+                    ]
+                },
+                sections: [{
+                    properties: {
+                        page: {
+                            margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }
+                        }
+                    },
+                    children: [
+                        // Cover page
+                        new Paragraph({
+                            children: [new TextRun({
+                                text: "Tax Sharing Agreement",
+                                bold: true,
+                                size: 28
+                            })],
+                            alignment: AlignmentType.CENTER,
+                            spacing: { before: 240, after: 240 }
+                        }),
+                        new Paragraph({
+                            children: [new TextRun({
+                                text: data.headCompanyName,
+                                bold: true,
+                                size: 24
+                            })],
+                            alignment: AlignmentType.CENTER,
+                            spacing: { after: 120 }
+                        }),
+                        new Paragraph({
+                            children: [new TextRun(`(ABN ${data.headCompanyABN})`)],
+                            alignment: AlignmentType.CENTER,
+                            spacing: { after: 240 }
+                        }),
+                        new Paragraph({
+                            children: [new TextRun({
+                                text: "The Parties Listed in Schedule 1",
+                                bold: true
+                            })],
+                            alignment: AlignmentType.CENTER,
+                            spacing: { after: 480 }
+                        }),
+                        
+                        new Paragraph({ children: [new PageBreak()] }),
+                        
+                        // Contents
+                        new Paragraph({
+                            children: [new TextRun("Contents")],
+                            heading: HeadingLevel.HEADING_1
+                        }),
+                        
+                        ...generateTableOfContents(),
+                        
+                        new Paragraph({ children: [new PageBreak()] }),
+                        
+                        // Parties section
+                        ...generatePartiesSection(data),
+                        
+                        // Recitals
+                        ...generateRecitals(data),
+                        
+                        new Paragraph({ children: [new PageBreak()] }),
+                        
+                        // Part A - Interpretation
+                        ...generatePartA(),
+                        
+                        new Paragraph({ children: [new PageBreak()] }),
+                        
+                        // Part B - Allocation
+                        ...generatePartB(data),
+                        
+                        new Paragraph({ children: [new PageBreak()] }),
+                        
+                        // Part C - Miscellaneous
+                        ...generatePartC(data),
+                        
+                        new Paragraph({ children: [new PageBreak()] }),
+                        
+                        // Schedules
+                        ...generateSchedules(data)
+                    ]
+                }]
+            });
+
+            const blob = await Packer.toBlob(doc);
+            const fileName = `TSA_${data.headCompanyName.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().split('T')[0]}.docx`;
+            saveAs(blob, fileName);
+        }
+
+        function generateTableOfContents() {
+            const contents = [
+                "1. Interpretation",
+                "2. Allocation of Group Liability",
+                "3. Calculation and Recording of Contribution Amounts",
+                "4. Clear Exit From Group Liability",
+                "5. Provision of Tax Sharing Agreement to Commissioner",
+                "6. Tax Audits and Disputes",
+                "7. Dispute Resolution",
+                "8. Changes to the Law",
+                "9. Precedence of Regulations",
+                "10. Prior Tax Sharing Agreement",
+                "11. Miscellaneous",
+                "12. Notices",
+                "13. Representations and Warranties",
+                "Schedule 1 -- Contributing Members",
+                "Schedule 2 -- Allocation Principles",
+                "Schedule 3 -- Accession Agreement",
+                "Schedule 4 -- Release Agreement",
+                "Execution Pages",
+                "Annexure A"
+            ];
+            
+            return contents.map(item => 
+                new Paragraph({
+                    children: [new TextRun(item)],
+                    spacing: { after: 60 }
+                })
+            );
+        }
+
+        function generatePartiesSection(data) {
+            const { Table, TableRow, TableCell, Paragraph, TextRun, AlignmentType, WidthType, BorderStyle } = docx;
+            
+            const border = { style: BorderStyle.SINGLE, size: 1, color: "000000" };
+            const cellBorders = { top: border, bottom: border, left: border, right: border };
+            
+            return [
+                new Paragraph({
+                    children: [new TextRun({
+                        text: "Date",
+                        bold: true
+                    })],
+                    spacing: { before: 240, after: 120 }
+                }),
+                new Paragraph({
+                    children: [new TextRun(`______________, being the date of final execution`)],
+                    spacing: { after: 240 }
+                }),
+                
+                new Paragraph({
+                    children: [new TextRun({
+                        text: "Parties",
+                        bold: true
+                    })],
+                    spacing: { after: 120 }
+                }),
+                
+                new Table({
+                    columnWidths: [2000, 7360],
+                    rows: [
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: "Name", bold: true })]
+                                    })]
+                                }),
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: data.headCompanyName, bold: true })]
+                                    })]
+                                })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: "ABN", bold: true })]
+                                    })]
+                                }),
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: data.headCompanyABN, bold: true })]
+                                    })]
+                                })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: "Description", bold: true })]
+                                    })]
+                                }),
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: "Head Company", bold: true })]
+                                    })]
+                                })
+                            ]
+                        }),
+                        new TableRow({
+                            children: [
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [new Paragraph({
+                                        children: [new TextRun({ text: "Notice details", bold: true })]
+                                    })]
+                                }),
+                                new TableCell({
+                                    borders: cellBorders,
+                                    children: [
+                                        new Paragraph({ children: [new TextRun(data.headCompanyAddress)] }),
+                                        new Paragraph({ children: [new TextRun(`E-mail: ${data.headCompanyEmail}`)] }),
+                                        new Paragraph({ children: [new TextRun(`Attention: ${data.companySecretary}`)] })
+                                    ]
+                                })
+                            ]
+                        })
+                    ]
+                }),
+                
+                new Paragraph({
+                    children: [new TextRun({
+                        text: "The Parties Listed in Schedule 1",
+                        bold: true
+                    })],
+                    spacing: { before: 240, after: 120 }
+                })
+            ];
+        }
+
+        function generateRecitals(data) {
+            const consolidationDateFormatted = new Date(data.consolidationDate).toLocaleDateString('en-AU', {
+                day: 'numeric', month: 'long', year: 'numeric'
+            });
+            
+            let recitalA;
+            if (data.groupType === 'mec') {
+                recitalA = `The Contributing Members and the Head Company are members of a multiple entry consolidated group for Australian tax purposes formed originally with effect from ${consolidationDateFormatted}.`;
+            } else if (data.groupType === 'mec-conversion') {
+                recitalA = `The Contributing Members and the Head Company are members of a multiple entry consolidated group for Australian tax purposes created by a special conversion event under section 719-40 of ITAA 1997 on ${consolidationDateFormatted}.`;
+            } else {
+                recitalA = `The Contributing Members and the Head Company are members of a consolidated group for Australian tax purposes formed originally with effect from ${consolidationDateFormatted}.`;
+            }
+            
+            return [
+                new Paragraph({
+                    children: [new TextRun({
+                        text: "Recitals",
+                        bold: true
+                    })],
+                    spacing: { before: 240, after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "A.\t", bold: true }),
+                        new TextRun(recitalA)
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "B.\t", bold: true }),
+                        new TextRun("Under section 721-15 of ITAA 1997, the Head Company and each of the Contributing Members are jointly and severally liable to pay a Group Liability if the Head Company were to fail to meet that Group Liability by the Due Date, unless the Group Liability is covered by a Tax Sharing Agreement.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "C.\t", bold: true }),
+                        new TextRun("While acknowledging that the primary obligation to pay any Group Liability rests with the Head Company, the Group Members wish to enter into this Agreement to ensure that the Group Members are not jointly and severally liable for a Group Liability if the Head Company fails to pay such Group Liability by the relevant Due Date, and intend this Agreement to be a Tax Sharing Agreement.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "D.\t", bold: true }),
+                        new TextRun("The Group Members have not entered into this Agreement as part of an arrangement with the purpose of prejudicing the recovery by the Commissioner of some or all of a Group Liability.")
+                    ],
+                    spacing: { after: 120 }
+                })
+            ];
+        }
+
+        function generatePartA() {
+            return [
+                new Paragraph({
+                    children: [new TextRun("PART A - INTERPRETATION")],
+                    heading: HeadingLevel.HEADING_1
+                }),
+                new Paragraph({
+                    children: [new TextRun("1. Interpretation")],
+                    heading: HeadingLevel.HEADING_2
+                }),
+                new Paragraph({
+                    children: [new TextRun("1.1 Definitions")],
+                    heading: HeadingLevel.HEADING_3
+                }),
+                new Paragraph({
+                    children: [new TextRun("Unless otherwise defined in this Agreement, capitalised terms used in this Agreement which have a defined meaning in the ITAA have the same meaning in this Agreement and:")],
+                    spacing: { after: 120 }
+                }),
+                
+                // Key definitions
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Accession Agreement", bold: true }),
+                        new TextRun(" means an accession agreement substantially in the form of Schedule 3 or in such other form determined by the Head Company.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Agreement", bold: true }),
+                        new TextRun(" means this Tax Sharing Agreement and all schedules, annexures and attachments to it, as amended by the parties in accordance with its terms.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Business Day", bold: true }),
+                        new TextRun(" means a day other than a Saturday, Sunday or public holiday on which banks are open for general business in Sydney.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Commissioner", bold: true }),
+                        new TextRun(" means the Federal Commissioner of Taxation of the Commonwealth of Australia or the Australian Taxation Office.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Contribution Amount", bold: true }),
+                        new TextRun(" means the amount determined in accordance with Part B of this Agreement for each Group Member in relation to a Group Liability.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Group Liability", bold: true }),
+                        new TextRun(" means any Tax-Related Liability of the Head Company of the Consolidated Group including any Amended Assessment of such Tax-Related Liability where a basis for determining an allocation of that Tax-Related Liability is specified in Schedule 2.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [
+                        new TextRun({ text: "Group Member", bold: true }),
+                        new TextRun(" means each of the Head Company and a Contributing Member.")
+                    ],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [new TextRun("(Additional definitions would continue here in the complete document)")],
+                    spacing: { after: 240 },
+                    italics: true
+                })
+            ];
+        }
+
+        function generatePartB(data) {
+            const allocationBasisText = data.allocationBasis === 'taxation' 
+                ? 'Notional Taxation Basis' 
+                : 'Notional Accounting Basis';
+            
+            return [
+                new Paragraph({
+                    children: [new TextRun("PART B -- ALLOCATION")],
+                    heading: HeadingLevel.HEADING_1
+                }),
+                new Paragraph({
+                    children: [new TextRun("2. Allocation of Group Liability")],
+                    heading: HeadingLevel.HEADING_2
+                }),
+                new Paragraph({
+                    children: [new TextRun("2.1 Consideration")],
+                    heading: HeadingLevel.HEADING_3
+                }),
+                new Paragraph({
+                    children: [new TextRun("In consideration for the mutual promises set out in this Agreement, each Group Member agrees to be bound by the terms and conditions set out in this Agreement.")],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [new TextRun("2.2 Purpose of Allocation Provisions")],
+                    heading: HeadingLevel.HEADING_3
+                }),
+                new Paragraph({
+                    children: [new TextRun("The purpose of the allocation provisions of this Agreement, as contained in this Part B (and supplemented by the other provisions of this Agreement), is to:")],
+                    spacing: { after: 120 }
+                }),
+                new Paragraph({
+                    children: [new TextRun("reasonably allocate each Group Liability among the Group Members;")],
+                    numbering: { reference: "lower-alpha-list", level: 0 }
+                }),
+                new Paragraph({
+                    children: [new TextRun("provide certainty in relation to such allocation so that a Group Member's Contribution Amount may be determined primarily by reference to this Part B; and")],
+                    numbering: { reference: "lower-alpha-list", level: 0 }
+                }),
+                new Paragraph({
+                    children: [new TextRun("meet any and all requirements for a valid Tax Sharing Agreement.")],
+                    numbering: { reference: "lower-alpha-list", level: 0 }
+                }),
+                
+                new Paragraph({
+                    children: [new TextRun("2.3 Reasonable Allocation")],
+                    heading: HeadingLevel.HEADING_3
+                }),
+                new Paragraph({
+                    children: [new TextRun("The amount of the Group Liability allocated to each Group Member under this Agreement represents a reasonable allocation of the total amount of the Group Liability among the Group Members immediately prior to the Due Date for that Group Liability.")],
+                    spacing: { after: 120 }
+                }),
+                
+                new Paragraph({
+                    children: [new TextRun(`The Item 3 Tax-Related Liability will be allocated using the ${allocationBasisText} as set out in Schedule 2.`)],
+                    spacing: { after: 120 },
+                    italics: true
+                })
+            ];
+        }
+
+        function generatePartC(data) {
+            return [
+                new Paragraph({
+                    children: [new TextRun("PART C -- MISCELLANEOUS")],
+                    heading: HeadingLevel.HEADING_1
+                }),
+                new Paragraph({
+                    children: [new TextRun("11. Miscellaneous")],
+                    heading: HeadingLevel.HEADING_2
+                }),
+                new Paragraph({
+                    children: [new TextRun("11.5 Governing Law and Jurisdiction")],
+                    heading: HeadingLevel.HEADING_3
+                }),
+                new Paragraph({
+                    children: [new TextRun(`This Agreement is governed by the laws of ${data.jurisdiction}.`)],
+                    numbering: { reference: "lower-alpha-list", level: 0 }
+                }),
+                new Paragraph({
+                    children: [new TextRun(`Each party irrevocably and unconditionally submits to the non-exclusive jurisdiction of the courts of ${data.jurisdiction} and any courts which have jurisdiction to hear appeals from any of those courts in respect of any proceedings in connection with this Agreement.`)],
+                    numbering: { reference: "lower-alpha-list", level: 0 }
+                }),
+                new Paragraph({
+                    children: [new TextRun(`Each party waives any right it has to object to an action being brought in the courts of ${data.jurisdiction} including, without limitation, by claiming that the action has been brought in an inconvenient forum or that those courts do not have jurisdiction.`)],
+                    numbering: { reference: "lower-alpha-list", level: 0 }
+                })
+            ];
+        }
+
+        function generateSchedules(data) {
+            const { Table, TableRow, TableCell, Paragraph, TextRun, AlignmentType, BorderStyle } = docx;
+            
+            const border = { style: BorderStyle.SINGLE, size: 1, color: "000000" };
+            const cellBorders = { top: border, bottom: border, left: border, right: border };
+            
+            let scheduleContent = [
+                new Paragraph({
+                    children: [new TextRun("Schedule 1 -- Contributing Members")],
+                    heading: HeadingLevel.HEADING_1
+                })
+            ];
+            
+            if (data.members.length > 0) {
+                const memberRows = data.members.map(member => 
+                    new TableRow({
+                        children: [
+                            new TableCell({
+                                borders: cellBorders,
+                                children: [new Paragraph({ children: [new TextRun(member.name)] })]
+                            }),
+                            new TableCell({
+                                borders: cellBorders,
+                                children: [new Paragraph({ children: [new TextRun(member.abn)] })]
+                            }),
+                            new TableCell({
+                                borders: cellBorders,
+                                children: [new Paragraph({ children: [new TextRun(member.address || '')] })]
+                            })
+                        ]
+                    })
+                );
+                
+                scheduleContent.push(
+                    new Table({
+                        columnWidths: [3000, 2000, 4360],
+                        rows: [
+                            new TableRow({
+                                children: [
+                                    new TableCell({
+                                        borders: cellBorders,
+                                        children: [new Paragraph({
+                                            children: [new TextRun({ text: "Member Name", bold: true })]
+                                        })]
+                                    }),
+                                    new TableCell({
+                                        borders: cellBorders,
+                                        children: [new Paragraph({
+                                            children: [new TextRun({ text: "ABN / ACN", bold: true })]
+                                        })]
+                                    }),
+                                    new TableCell({
+                                        borders: cellBorders,
+                                        children: [new Paragraph({
+                                            children: [new TextRun({ text: "Address and E-mail", bold: true })]
+                                        })]
+                                    })
+                                ]
+                            }),
+                            ...memberRows
+                        ]
+                    })
+                );
+            } else {
+                scheduleContent.push(
+                    new Paragraph({
+                        children: [new TextRun("No contributing members have been added to this agreement.")],
+                        spacing: { after: 120 },
+                        italics: true
+                    })
+                );
+            }
+            
+            scheduleContent.push(
+                new Paragraph({ children: [new PageBreak()] }),
+                new Paragraph({
+                    children: [new TextRun("Schedule 2 -- Allocation Principles")],
+                    heading: HeadingLevel.HEADING_1
+                }),
+                new Paragraph({
+                    children: [new TextRun(`The Allocation Principles for each of the Tax-Related Liabilities of the Head Company are as set out in the complete PwC TSA template. The Item 3 Tax-Related Liability will be allocated using the ${data.allocationBasis === 'taxation' ? 'Notional Taxation Basis' : 'Notional Accounting Basis'}.`)],
+                    spacing: { after: 240 },
+                    italics: true
+                })
+            );
+            
+            return scheduleContent;
+        }
+    </script>
 </body>
 </html>
