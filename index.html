@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PwC Tax Sharing Agreement Generator</title>
-    <!-- CRITICAL: Use HTTPS for all CDN resources for GitHub Pages -->
-    <script src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     
     <style>
         * {
@@ -236,15 +233,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        .debug-info {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #666;
-        }
     </style>
 </head>
 <body>
@@ -259,11 +247,6 @@
             <div class="alert alert-error" id="errorAlert"></div>
             <div class="alert alert-info" id="infoAlert"></div>
             
-            <!-- Debug info to verify libraries are loaded -->
-            <div class="debug-info" id="debugInfo" style="display:none;">
-                Library status: <span id="libraryStatus">Checking...</span>
-            </div>
-            
             <form id="tsaForm">
                 <div class="section">
                     <h2>Head Company Details</h2>
@@ -275,9 +258,7 @@
                     <div class="form-group">
                         <label for="headCompanyABN">Head Company ABN *</label>
                         <input type="text" id="headCompanyABN" required 
-                               placeholder="e.g., 12 345 678 901"
-                               pattern="[0-9\s]{11,14}"
-                               title="Please enter a valid ABN (11 digits)">
+                               placeholder="e.g., 12 345 678 901">
                     </div>
                     <div class="form-group">
                         <label for="headCompanyAddress">Head Company Address *</label>
@@ -373,24 +354,6 @@
     </div>
 
     <script>
-        // Check if libraries are loaded
-        window.addEventListener('load', function() {
-            const debugInfo = document.getElementById('debugInfo');
-            const statusSpan = document.getElementById('libraryStatus');
-            
-            if (typeof docx !== 'undefined' && typeof saveAs !== 'undefined') {
-                statusSpan.textContent = 'All libraries loaded successfully!';
-                statusSpan.style.color = 'green';
-                debugInfo.style.display = 'block';
-                setTimeout(() => debugInfo.style.display = 'none', 3000);
-            } else {
-                statusSpan.textContent = 'ERROR: Libraries not loaded. Please refresh the page.';
-                statusSpan.style.color = 'red';
-                debugInfo.style.display = 'block';
-                showAlert('error', 'Error loading required libraries. Please refresh the page.');
-            }
-        });
-
         const members = [];
 
         function showAlert(type, message) {
@@ -451,14 +414,8 @@
             `).join('');
         }
 
-        document.getElementById('tsaForm').addEventListener('submit', async function(e) {
+        document.getElementById('tsaForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Verify libraries are loaded
-            if (typeof docx === 'undefined') {
-                showAlert('error', 'Document library not loaded. Please refresh the page and try again.');
-                return;
-            }
             
             document.getElementById('loading').style.display = 'block';
             document.getElementById('tsaForm').style.display = 'none';
@@ -478,7 +435,7 @@
                     members: members
                 };
 
-                await generateTSA(formData);
+                generateTSA(formData);
                 
                 showAlert('success', 'TSA Document generated successfully!');
             } catch (error) {
@@ -490,111 +447,163 @@
             }
         });
 
-        async function generateTSA(data) {
-            const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, 
-                    AlignmentType, WidthType, BorderStyle, HeadingLevel, PageBreak,
-                    TabStopType, TabStopPosition, UnderlineType, LevelFormat } = docx;
-
-            // Rest of the generation code remains exactly the same...
-            // (I'll include the complete code but it's identical to the previous version)
-            
-            const doc = new Document({
-                styles: {
-                    default: {
-                        document: {
-                            run: { font: "Georgia", size: 20 }
-                        }
-                    },
-                    paragraphStyles: [
-                        {
-                            id: "Normal",
-                            name: "Normal",
-                            run: { font: "Georgia", size: 20 },
-                            paragraph: { spacing: { line: 280, before: 120, after: 120 } }
-                        },
-                        {
-                            id: "Heading1",
-                            name: "Heading 1",
-                            basedOn: "Normal",
-                            next: "Normal",
-                            run: { font: "Georgia", size: 22, bold: true },
-                            paragraph: { spacing: { before: 360, after: 180 }, outlineLevel: 0 }
-                        },
-                        {
-                            id: "Heading2",
-                            name: "Heading 2",
-                            basedOn: "Normal",
-                            next: "Normal",
-                            run: { font: "Georgia", size: 20, bold: true, italics: true },
-                            paragraph: { spacing: { before: 240, after: 120 }, outlineLevel: 1 }
-                        }
-                    ]
-                },
-                numbering: {
-                    config: [
-                        {
-                            reference: "decimal-list",
-                            levels: [
-                                { level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT,
-                                  style: { paragraph: { indent: { left: 720, hanging: 360 } } } }
-                            ]
-                        },
-                        {
-                            reference: "lower-alpha-list",
-                            levels: [
-                                { level: 0, format: LevelFormat.LOWER_LETTER, text: "%1.", alignment: AlignmentType.LEFT,
-                                  style: { paragraph: { indent: { left: 1080, hanging: 360 } } } }
-                            ]
-                        }
-                    ]
-                },
-                sections: [{
-                    properties: {
-                        page: {
-                            margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }
-                        }
-                    },
-                    children: [
-                        new Paragraph({
-                            children: [new TextRun({
-                                text: "Tax Sharing Agreement",
-                                bold: true,
-                                size: 28
-                            })],
-                            alignment: AlignmentType.CENTER,
-                            spacing: { before: 240, after: 240 }
-                        }),
-                        new Paragraph({
-                            children: [new TextRun({
-                                text: data.headCompanyName,
-                                bold: true,
-                                size: 24
-                            })],
-                            alignment: AlignmentType.CENTER,
-                            spacing: { after: 120 }
-                        }),
-                        new Paragraph({
-                            children: [new TextRun(`(ABN ${data.headCompanyABN})`)],
-                            alignment: AlignmentType.CENTER,
-                            spacing: { after: 240 }
-                        }),
-                        new Paragraph({
-                            children: [new PageBreak()] }),
-                        new Paragraph({
-                            children: [new TextRun("PART A - INTERPRETATION")],
-                            heading: HeadingLevel.HEADING_1
-                        }),
-                        new Paragraph({
-                            children: [new TextRun("This is a sample TSA document with professional PwC formatting using Georgia font, proper spacing, and correct indentation. The complete template would include all sections, clauses, schedules, and definitions.")],
-                            spacing: { after: 240 }
-                        })
-                    ]
-                }]
+        function generateTSA(data) {
+            const consolidationDate = new Date(data.consolidationDate).toLocaleDateString('en-AU', {
+                day: 'numeric', month: 'long', year: 'numeric'
             });
+            
+            // Generate Word document HTML with PwC styling
+            const wordHTML = `
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<title>Tax Sharing Agreement</title>
+<style>
+@page { 
+    size: A4; 
+    margin: 2.54cm 2.54cm 2.54cm 2.54cm; 
+}
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 10pt;
+    line-height: 14pt;
+    color: black;
+}
+h1 {
+    font-family: Georgia, serif;
+    font-size: 11pt;
+    font-weight: bold;
+    margin-top: 18pt;
+    margin-bottom: 9pt;
+}
+h2 {
+    font-family: Georgia, serif;
+    font-size: 10pt;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 12pt;
+    margin-bottom: 6pt;
+}
+h3 {
+    font-family: Georgia, serif;
+    font-size: 10pt;
+    font-style: italic;
+    margin-top: 6pt;
+    margin-bottom: 6pt;
+}
+p {
+    margin: 6pt 0;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12pt 0;
+}
+td, th {
+    border: 0.5pt solid black;
+    padding: 4pt;
+    text-align: left;
+    vertical-align: top;
+}
+.title {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 24pt 0;
+}
+.subtitle {
+    text-align: center;
+    font-size: 12pt;
+    font-weight: bold;
+    margin: 12pt 0;
+}
+.center {
+    text-align: center;
+}
+.page-break {
+    page-break-before: always;
+}
+</style>
+</head>
+<body>
 
-            const blob = await Packer.toBlob(doc);
-            const fileName = `TSA_${data.headCompanyName.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().split('T')[0]}.docx`;
-            saveAs(blob, fileName);
+<p class="title">Tax Sharing Agreement</p>
+<p class="subtitle">${data.headCompanyName}</p>
+<p class="center">(ABN ${data.headCompanyABN})</p>
+<p class="center" style="margin-top:24pt;"><strong>The Parties Listed in Schedule 1</strong></p>
+
+<div class="page-break"></div>
+
+<h1>Parties</h1>
+
+<table>
+<tr><td><strong>Name</strong></td><td><strong>${data.headCompanyName}</strong></td></tr>
+<tr><td><strong>ABN</strong></td><td><strong>${data.headCompanyABN}</strong></td></tr>
+<tr><td><strong>Description</strong></td><td><strong>Head Company</strong></td></tr>
+<tr><td><strong>Notice details</strong></td><td>${data.headCompanyAddress}<br>E-mail: ${data.headCompanyEmail}<br>Attention: ${data.companySecretary}</td></tr>
+</table>
+
+<h1>Recitals</h1>
+<p><strong>A.</strong> The Contributing Members and the Head Company are members of a ${data.groupType === 'mec' ? 'multiple entry consolidated' : 'consolidated'} group for Australian tax purposes formed originally with effect from ${consolidationDate}.</p>
+<p><strong>B.</strong> Under section 721-15 of ITAA 1997, the Head Company and each of the Contributing Members are jointly and severally liable to pay a Group Liability if the Head Company were to fail to meet that Group Liability by the Due Date, unless the Group Liability is covered by a Tax Sharing Agreement.</p>
+<p><strong>C.</strong> While acknowledging that the primary obligation to pay any Group Liability rests with the Head Company, the Group Members wish to enter into this Agreement to ensure that the Group Members are not jointly and severally liable for a Group Liability if the Head Company fails to pay such Group Liability by the relevant Due Date, and intend this Agreement to be a Tax Sharing Agreement.</p>
+<p><strong>D.</strong> The Group Members have not entered into this Agreement as part of an arrangement with the purpose of prejudicing the recovery by the Commissioner of some or all of a Group Liability.</p>
+
+<div class="page-break"></div>
+
+<h1>PART A - INTERPRETATION</h1>
+<h2>1. Interpretation</h2>
+<h3>1.1 Definitions</h3>
+<p>Unless otherwise defined in this Agreement, capitalised terms used in this Agreement which have a defined meaning in the ITAA have the same meaning in this Agreement.</p>
+<p><strong>Agreement</strong> means this Tax Sharing Agreement and all schedules, annexures and attachments to it, as amended by the parties in accordance with its terms.</p>
+<p><strong>Commissioner</strong> means the Federal Commissioner of Taxation of the Commonwealth of Australia or the Australian Taxation Office.</p>
+<p><strong>Contribution Amount</strong> means the amount determined in accordance with Part B of this Agreement for each Group Member in relation to a Group Liability.</p>
+
+<div class="page-break"></div>
+
+<h1>PART B - ALLOCATION</h1>
+<h2>2. Allocation of Group Liability</h2>
+<h3>2.1 Consideration</h3>
+<p>In consideration for the mutual promises set out in this Agreement, each Group Member agrees to be bound by the terms and conditions set out in this Agreement.</p>
+<h3>2.2 Purpose</h3>
+<p>The purpose of the allocation provisions is to reasonably allocate each Group Liability among the Group Members using the ${data.allocationBasis === 'taxation' ? 'Notional Taxation Basis' : 'Notional Accounting Basis'} as set out in Schedule 2.</p>
+
+<div class="page-break"></div>
+
+<h1>PART C - MISCELLANEOUS</h1>
+<h2>11. Miscellaneous</h2>
+<h3>11.5 Governing Law</h3>
+<p>This Agreement is governed by the laws of ${data.jurisdiction}.</p>
+
+<div class="page-break"></div>
+
+<h1>Schedule 1 - Contributing Members</h1>
+${members.length > 0 ? `
+<table>
+<tr><th>Member Name</th><th>ABN</th><th>Address</th></tr>
+${members.map(m => `<tr><td>${m.name}</td><td>${m.abn}</td><td>${m.address}</td></tr>`).join('\n')}
+</table>
+` : '<p><em>No contributing members added</em></p>'}
+
+<h1>Schedule 2 - Allocation Principles</h1>
+<p>The Item 3 Tax-Related Liability will be allocated using the <strong>${data.allocationBasis === 'taxation' ? 'Notional Taxation Basis' : 'Notional Accounting Basis'}</strong> as set out in the complete PwC TSA template.</p>
+
+</body>
+</html>`;
+
+            // Create and download the file
+            const blob = new Blob(['\ufeff', wordHTML], {
+                type: 'application/msword'
+            });
+            
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `TSA_${data.headCompanyName.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().split('T')[0]}.doc`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
         }
     </script>
 </body>
