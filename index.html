@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PwC Tax Sharing Agreement Generator</title>
-    
+    <title>PwC Tax Sharing Agreement Generator - Complete Edition</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -27,33 +20,16 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        
         .header {
             background: linear-gradient(135deg, #D04A02 0%, #ff6b35 100%);
             color: white;
             padding: 40px;
             text-align: center;
         }
-        
-        .header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .header p {
-            font-size: 16px;
-            opacity: 0.95;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
+        .header h1 { font-size: 32px; margin-bottom: 10px; font-weight: 600; }
+        .header p { font-size: 16px; opacity: 0.95; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 30px; }
         .section h2 {
             color: #D04A02;
             font-size: 20px;
@@ -61,11 +37,7 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
+        .form-group { margin-bottom: 20px; }
         label {
             display: block;
             margin-bottom: 8px;
@@ -73,7 +45,6 @@
             font-weight: 500;
             font-size: 14px;
         }
-        
         input, select, textarea {
             width: 100%;
             padding: 12px 15px;
@@ -83,25 +54,18 @@
             transition: all 0.3s;
             font-family: inherit;
         }
-        
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #D04A02;
             box-shadow: 0 0 0 3px rgba(208, 74, 2, 0.1);
         }
-        
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        
+        textarea { resize: vertical; min-height: 100px; }
         .member-list {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 10px;
             margin-top: 15px;
         }
-        
         .member-item {
             background: white;
             padding: 15px;
@@ -112,22 +76,9 @@
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        
-        .member-info {
-            flex: 1;
-        }
-        
-        .member-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
-        }
-        
-        .member-abn {
-            font-size: 13px;
-            color: #666;
-        }
-        
+        .member-info { flex: 1; }
+        .member-name { font-weight: 600; color: #333; margin-bottom: 4px; }
+        .member-abn { font-size: 13px; color: #666; }
         .btn {
             padding: 12px 30px;
             border: none;
@@ -139,86 +90,36 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
         .btn-primary {
             background: linear-gradient(135deg, #D04A02 0%, #ff6b35 100%);
             color: white;
         }
-        
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(208, 74, 2, 0.3);
         }
-        
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-        
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-            padding: 8px 16px;
-            font-size: 13px;
-        }
-        
-        .btn-danger:hover {
-            background: #c82333;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-secondary:hover { background: #5a6268; }
+        .btn-danger { background: #dc3545; color: white; padding: 8px 16px; font-size: 13px; }
+        .btn-danger:hover { background: #c82333; }
+        .button-group { display: flex; gap: 15px; margin-top: 30px; }
         .alert {
             padding: 15px 20px;
             border-radius: 8px;
             margin-bottom: 20px;
             display: none;
         }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .alert-info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-        
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 20px;
         }
-        
-        .checkbox-group input[type="checkbox"] {
-            width: auto;
-            margin: 0;
-        }
-        
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-        
+        .checkbox-group input[type="checkbox"] { width: auto; margin: 0; }
+        .loading { display: none; text-align: center; padding: 20px; }
         .spinner {
             border: 3px solid #f3f3f3;
             border-top: 3px solid #D04A02;
@@ -228,17 +129,25 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        .version-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: inline-block;
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Tax Sharing Agreement Generator</h1>
+            <h1>Tax Sharing Agreement Generator <span class="version-badge">Complete v2.0</span></h1>
             <p>PwC Professional Document Generation Tool</p>
         </div>
         
@@ -249,36 +158,31 @@
             
             <form id="tsaForm">
                 <div class="section">
-                    <h2>Head Company Details</h2>
+                    <h2>📋 Head Company Details</h2>
                     <div class="form-group">
                         <label for="headCompanyName">Head Company Name *</label>
-                        <input type="text" id="headCompanyName" required 
-                               placeholder="e.g., ABC Holdings Pty Ltd">
+                        <input type="text" id="headCompanyName" required placeholder="e.g., ABC Holdings Pty Ltd">
                     </div>
                     <div class="form-group">
                         <label for="headCompanyABN">Head Company ABN *</label>
-                        <input type="text" id="headCompanyABN" required 
-                               placeholder="e.g., 12 345 678 901">
+                        <input type="text" id="headCompanyABN" required placeholder="e.g., 12 345 678 901">
                     </div>
                     <div class="form-group">
                         <label for="headCompanyAddress">Head Company Address *</label>
-                        <textarea id="headCompanyAddress" required 
-                                  placeholder="123 Business Street, Sydney NSW 2000"></textarea>
+                        <textarea id="headCompanyAddress" required placeholder="123 Business Street, Sydney NSW 2000"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="headCompanyEmail">Head Company Email *</label>
-                        <input type="email" id="headCompanyEmail" required 
-                               placeholder="secretary@company.com.au">
+                        <input type="email" id="headCompanyEmail" required placeholder="secretary@company.com.au">
                     </div>
                     <div class="form-group">
                         <label for="companySecretary">Company Secretary Name</label>
-                        <input type="text" id="companySecretary" 
-                               placeholder="John Smith">
+                        <input type="text" id="companySecretary" placeholder="John Smith">
                     </div>
                 </div>
 
                 <div class="section">
-                    <h2>Agreement Details</h2>
+                    <h2>📅 Agreement Details</h2>
                     <div class="form-group">
                         <label for="consolidationDate">Date of Consolidation *</label>
                         <input type="date" id="consolidationDate" required>
@@ -309,14 +213,22 @@
                             <option value="Tasmania">Tasmania</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="financialYearEnd">Financial Year End *</label>
+                        <input type="text" id="financialYearEnd" required value="30 June" placeholder="30 June">
+                    </div>
+                    <div class="form-group">
+                        <label for="businessDayCity">Business Day City *</label>
+                        <input type="text" id="businessDayCity" required value="Sydney" placeholder="Sydney">
+                    </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="hasPriorTSA">
-                        <label for="hasPriorTSA">Has Prior Tax Sharing Agreement</label>
+                        <label for="hasPriorTSA">Has Prior Tax Sharing Agreement (Clause 10)</label>
                     </div>
                 </div>
 
                 <div class="section">
-                    <h2>Contributing Members</h2>
+                    <h2>👥 Contributing Members</h2>
                     <div class="form-group">
                         <label for="memberName">Member Name</label>
                         <input type="text" id="memberName" placeholder="Member Company Name">
@@ -329,9 +241,7 @@
                         <label for="memberAddress">Member Address & Email</label>
                         <textarea id="memberAddress" placeholder="Address and email"></textarea>
                     </div>
-                    <button type="button" class="btn btn-secondary" onclick="addMember()">
-                        Add Member
-                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="addMember()">➕ Add Member</button>
                     
                     <div class="member-list" id="memberList" style="display: none;">
                         <h3 style="margin-bottom: 15px; color: #333;">Added Members:</h3>
@@ -340,15 +250,13 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-primary">
-                        Generate TSA Document
-                    </button>
+                    <button type="submit" class="btn btn-primary">📄 Generate Complete TSA Document</button>
                 </div>
             </form>
             
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p style="margin-top: 15px; color: #666;">Generating your document...</p>
+                <p style="margin-top: 15px; color: #666;">Generating your comprehensive TSA document with all clauses...</p>
             </div>
         </div>
     </div>
@@ -357,30 +265,25 @@
         const members = [];
 
         function showAlert(type, message) {
-            const alertId = type === 'success' ? 'successAlert' : 
-                           type === 'error' ? 'errorAlert' : 'infoAlert';
+            const alertId = type === 'success' ? 'successAlert' : type === 'error' ? 'errorAlert' : 'infoAlert';
             const alert = document.getElementById(alertId);
             alert.textContent = message;
             alert.style.display = 'block';
-            setTimeout(() => alert.style.display = 'none', 5000);
+            setTimeout(() => alert.style.display = 'none', 6000);
         }
 
         function addMember() {
             const name = document.getElementById('memberName').value.trim();
             const abn = document.getElementById('memberABN').value.trim();
             const address = document.getElementById('memberAddress').value.trim();
-
             if (!name || !abn) {
                 showAlert('error', 'Please enter member name and ABN');
                 return;
             }
-
             members.push({ name, abn, address });
-            
             document.getElementById('memberName').value = '';
             document.getElementById('memberABN').value = '';
             document.getElementById('memberAddress').value = '';
-            
             updateMemberList();
             showAlert('success', 'Member added successfully');
         }
@@ -394,12 +297,10 @@
         function updateMemberList() {
             const container = document.getElementById('membersContainer');
             const listDiv = document.getElementById('memberList');
-            
             if (members.length === 0) {
                 listDiv.style.display = 'none';
                 return;
             }
-            
             listDiv.style.display = 'block';
             container.innerHTML = members.map((member, index) => `
                 <div class="member-item">
@@ -407,16 +308,13 @@
                         <div class="member-name">${member.name}</div>
                         <div class="member-abn">ABN: ${member.abn}</div>
                     </div>
-                    <button type="button" class="btn btn-danger" onclick="removeMember(${index})">
-                        Remove
-                    </button>
+                    <button type="button" class="btn btn-danger" onclick="removeMember(${index})">Remove</button>
                 </div>
             `).join('');
         }
 
         document.getElementById('tsaForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             document.getElementById('loading').style.display = 'block';
             document.getElementById('tsaForm').style.display = 'none';
             
@@ -431,13 +329,13 @@
                     groupType: document.getElementById('groupType').value,
                     allocationBasis: document.getElementById('allocationBasis').value,
                     jurisdiction: document.getElementById('jurisdiction').value,
+                    financialYearEnd: document.getElementById('financialYearEnd').value,
+                    businessDayCity: document.getElementById('businessDayCity').value,
                     hasPriorTSA: document.getElementById('hasPriorTSA').checked,
                     members: members
                 };
-
-                generateTSA(formData);
-                
-                showAlert('success', 'TSA Document generated successfully!');
+                generateCompleteTSA(formData);
+                showAlert('success', 'Complete TSA Document generated successfully with all clauses!');
             } catch (error) {
                 console.error('Error:', error);
                 showAlert('error', 'Error generating document: ' + error.message);
@@ -447,27 +345,53 @@
             }
         });
 
-        function generateTSA(data) {
+        function escapeXml(text) {
+            if (!text) return '';
+            return text.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&apos;');
+        }
+
+        function generateCompleteTSA(data) {
             const consolidationDate = new Date(data.consolidationDate).toLocaleDateString('en-AU', {
                 day: 'numeric', month: 'long', year: 'numeric'
             });
             
-            // Generate Word document HTML with PwC styling
-            const wordHTML = `
-<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+            const isMEC = data.groupType === 'mec' || data.groupType === 'mec-conversion';
+            const groupTypeText = data.groupType === 'mec' ? 'multiple entry consolidated' : 
+                                 data.groupType === 'mec-conversion' ? 'multiple entry consolidated' : 
+                                 'consolidated';
+            
+            // Generate complete HTML Word document with ALL PwC content
+            const wordHTML = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 <meta charset="utf-8">
 <title>Tax Sharing Agreement</title>
+<!--[if gte mso 9]>
+<xml>
+<w:WordDocument>
+<w:View>Print</w:View>
+<w:Zoom>100</w:Zoom>
+<w:DoNotOptimizeForBrowser/>
+</w:WordDocument>
+</xml>
+<![endif]-->
 <style>
 @page { 
     size: A4; 
-    margin: 2.54cm 2.54cm 2.54cm 2.54cm; 
+    margin: 2.54cm 2.54cm 2.54cm 2.54cm;
+    mso-header-margin: 1.27cm;
+    mso-footer-margin: 1.27cm;
 }
 body {
     font-family: Georgia, 'Times New Roman', serif;
     font-size: 10pt;
     line-height: 14pt;
     color: black;
+    margin: 0;
 }
 h1 {
     font-family: Georgia, serif;
@@ -475,6 +399,7 @@ h1 {
     font-weight: bold;
     margin-top: 18pt;
     margin-bottom: 9pt;
+    page-break-after: avoid;
 }
 h2 {
     font-family: Georgia, serif;
@@ -483,6 +408,7 @@ h2 {
     font-style: italic;
     margin-top: 12pt;
     margin-bottom: 6pt;
+    page-break-after: avoid;
 }
 h3 {
     font-family: Georgia, serif;
@@ -490,10 +416,15 @@ h3 {
     font-style: italic;
     margin-top: 6pt;
     margin-bottom: 6pt;
+    page-break-after: avoid;
 }
 p {
     margin: 6pt 0;
+    text-align: justify;
 }
+.indent1 { margin-left: 36pt; }
+.indent2 { margin-left: 72pt; }
+.indent3 { margin-left: 108pt; }
 table {
     border-collapse: collapse;
     width: 100%;
@@ -501,9 +432,13 @@ table {
 }
 td, th {
     border: 0.5pt solid black;
-    padding: 4pt;
+    padding: 6pt;
     text-align: left;
     vertical-align: top;
+}
+th {
+    background-color: #E6E6E6;
+    font-weight: bold;
 }
 .title {
     text-align: center;
@@ -517,76 +452,787 @@ td, th {
     font-weight: bold;
     margin: 12pt 0;
 }
-.center {
-    text-align: center;
-}
-.page-break {
-    page-break-before: always;
-}
+.center { text-align: center; }
+.page-break { page-break-before: always; }
+.keep-together { page-break-inside: avoid; }
+ol { margin-left: 36pt; padding-left: 0; }
+ol li { margin-bottom: 6pt; }
+.definition-term { font-weight: bold; }
 </style>
 </head>
 <body>
 
 <p class="title">Tax Sharing Agreement</p>
-<p class="subtitle">${data.headCompanyName}</p>
-<p class="center">(ABN ${data.headCompanyABN})</p>
+<p class="subtitle">${escapeXml(data.headCompanyName)}</p>
+<p class="center">(ABN ${escapeXml(data.headCompanyABN)})</p>
 <p class="center" style="margin-top:24pt;"><strong>The Parties Listed in Schedule 1</strong></p>
 
 <div class="page-break"></div>
 
+<h1>Contents</h1>
+<p>1. Interpretation</p>
+<p>2. Allocation of Group Liability</p>
+<p>3. Calculation and Recording of Contribution Amounts</p>
+<p>4. Clear Exit From Group Liability</p>
+<p>5. Provision of Tax Sharing Agreement to Commissioner</p>
+<p>6. Tax Audits and Disputes</p>
+<p>7. Dispute Resolution</p>
+<p>8. Changes to the Law</p>
+<p>9. Precedence of Regulations</p>
+${data.hasPriorTSA ? '<p>10. Prior Tax Sharing Agreement</p>' : ''}
+<p>11. Miscellaneous</p>
+<p>12. Notices</p>
+<p>13. Representations and Warranties</p>
+<p>Schedule 1 -- Contributing Members</p>
+<p>Schedule 2 -- Allocation Principles</p>
+<p>Schedule 3 -- Accession Agreement</p>
+<p>Schedule 4 -- Release Agreement</p>
+<p>Execution Pages</p>
+<p>Annexure A</p>
+
+<div class="page-break"></div>
+
+<h1>Date</h1>
+<p>______________, being the date of final execution</p>
+
 <h1>Parties</h1>
+<table>
+<tr><th>Name</th><td><strong>${escapeXml(data.headCompanyName)}</strong></td></tr>
+<tr><th>ABN</th><td><strong>${escapeXml(data.headCompanyABN)}</strong></td></tr>
+<tr><th>Description</th><td><strong>Head Company</strong></td></tr>
+<tr><th>Notice details</th><td>${escapeXml(data.headCompanyAddress)}<br>E-mail: ${escapeXml(data.headCompanyEmail)}<br>Attention: ${escapeXml(data.companySecretary)}</td></tr>
+</table>
 
 <table>
-<tr><td><strong>Name</strong></td><td><strong>${data.headCompanyName}</strong></td></tr>
-<tr><td><strong>ABN</strong></td><td><strong>${data.headCompanyABN}</strong></td></tr>
-<tr><td><strong>Description</strong></td><td><strong>Head Company</strong></td></tr>
-<tr><td><strong>Notice details</strong></td><td>${data.headCompanyAddress}<br>E-mail: ${data.headCompanyEmail}<br>Attention: ${data.companySecretary}</td></tr>
+<tr><th>Name</th><td>The Parties Listed in Schedule 1</td></tr>
 </table>
 
 <h1>Recitals</h1>
-<p><strong>A.</strong> The Contributing Members and the Head Company are members of a ${data.groupType === 'mec' ? 'multiple entry consolidated' : 'consolidated'} group for Australian tax purposes formed originally with effect from ${consolidationDate}.</p>
+<p><strong>A.</strong> The Contributing Members and the Head Company are members of a ${groupTypeText} group for Australian tax purposes formed originally with effect from ${consolidationDate}.</p>
+
 <p><strong>B.</strong> Under section 721-15 of ITAA 1997, the Head Company and each of the Contributing Members are jointly and severally liable to pay a Group Liability if the Head Company were to fail to meet that Group Liability by the Due Date, unless the Group Liability is covered by a Tax Sharing Agreement.</p>
+
 <p><strong>C.</strong> While acknowledging that the primary obligation to pay any Group Liability rests with the Head Company, the Group Members wish to enter into this Agreement to ensure that the Group Members are not jointly and severally liable for a Group Liability if the Head Company fails to pay such Group Liability by the relevant Due Date, and intend this Agreement to be a Tax Sharing Agreement.</p>
+
 <p><strong>D.</strong> The Group Members have not entered into this Agreement as part of an arrangement with the purpose of prejudicing the recovery by the Commissioner of some or all of a Group Liability.</p>
 
 <div class="page-break"></div>
 
+<h1>Agreed Terms</h1>
+
 <h1>PART A - INTERPRETATION</h1>
+
 <h2>1. Interpretation</h2>
+
 <h3>1.1 Definitions</h3>
-<p>Unless otherwise defined in this Agreement, capitalised terms used in this Agreement which have a defined meaning in the ITAA have the same meaning in this Agreement.</p>
-<p><strong>Agreement</strong> means this Tax Sharing Agreement and all schedules, annexures and attachments to it, as amended by the parties in accordance with its terms.</p>
-<p><strong>Commissioner</strong> means the Federal Commissioner of Taxation of the Commonwealth of Australia or the Australian Taxation Office.</p>
-<p><strong>Contribution Amount</strong> means the amount determined in accordance with Part B of this Agreement for each Group Member in relation to a Group Liability.</p>
+
+<p>Unless otherwise defined in this Agreement, capitalised terms used in this Agreement which have a defined meaning in the ITAA have the same meaning in this Agreement and:</p>
+
+<p><span class="definition-term">Accession Agreement</span> means an accession agreement substantially in the form of Schedule 3 or in such other form determined by the Head Company.</p>
+
+<p><span class="definition-term">Agreement</span> means this Tax Sharing Agreement and all schedules, annexures and attachments to it, as amended by the parties in accordance with its terms.</p>
+
+<p><span class="definition-term">Allocation Principles</span> means the allocation principles set out in Schedule 2.</p>
+
+<p><span class="definition-term">Amended Assessment</span> means an assessment which is amended by the Commissioner in accordance with section 170 of ITAA 1936.</p>
+
+<p><span class="definition-term">Business Day</span> means a day other than a Saturday, Sunday or public holiday on which banks are open for general business in ${escapeXml(data.businessDayCity)}.</p>
+
+<p><span class="definition-term">Calculation Advice</span> means a notice provided by the Head Company to a Group Member under clause 3.1.</p>
+
+<p><span class="definition-term">Capital Gain</span> has the meaning given to that term in the ITAA 1997.</p>
+
+<p><span class="definition-term">CGT Event</span> has the meaning given to that term in the ITAA 1997.</p>
+
+<p><span class="definition-term">Commissioner</span> means the Federal Commissioner of Taxation of the Commonwealth of Australia or the Australian Taxation Office.</p>
+
+<p><span class="definition-term">Consolidated Group</span> means the ${isMEC ? 'MEC' : 'consolidated group as defined in subsection 703-5 of ITAA 1997'} of which the Head Company is the ${isMEC ? 'provisional head company appointed in accordance with subsection 719-60' : 'head company for the purposes of subsection 703-15'} of ITAA 1997.</p>
+
+<p><span class="definition-term">Contributing Member</span> means, subject to the terms of this Agreement, an entity, Trust or Partnership listed in Schedule 1 of this Agreement and any other entity, Trust or Partnership which becomes a party to this Agreement by executing an Accession Agreement${isMEC ? ', and a party to this Agreement that ceases to be the provisional Head Company of the Consolidated Group' : ''}.</p>
+
+<p><span class="definition-term">Contribution Amount</span> means the amount determined in accordance with Part B of this Agreement for each Group Member in relation to a Group Liability.</p>
+
+<p><span class="definition-term">Corporations Act</span> means the <em>Corporations Act 2001</em> (Cth) as amended and in force from time to time.</p>
+
+<p><span class="definition-term">Dispute Expert</span> has the meaning given to the term in clause 7.3.</p>
+
+<p><span class="definition-term">DPT Base Amount</span> has the meaning set out in section 177P(2) of the ITAA 1936.</p>
+
+<p><span class="definition-term">DPT Group Liability</span> means the Group Liability referred to in Item 115 of section 721-10(2) of the ITAA 1997.</p>
+
+<p><span class="definition-term">DPT Tax Benefit</span> means a tax benefit as defined in section 177J(1) of the ITAA 1936.</p>
+
+<p><span class="definition-term">Due Date</span> in relation to a Group Liability, means the time at which the Group Liability becomes, or became, due and payable by the Head Company to the Commissioner.</p>
+
+<p><span class="definition-term">Electronic Signature</span> means: (a) an encrypted signature applied using a proprietary program (for example DocuSign or AdobeSign) which is applied following verification of an individual's identity; or (b) the digital image of an individual's manuscript signature (regardless of whether it is a digitally generated image, or a scanned copy of a physically signed document).</p>
+
+<p><span class="definition-term">Exit Date</span> has the meaning given to the term in clause 4.2.</p>
+
+<p><span class="definition-term">Exiting Member</span> has the meaning given to the term in clause 4.1.</p>
+
+<p><span class="definition-term">Financial Year</span> means a period of 12 months ending on ${escapeXml(data.financialYearEnd)} each year provided that the first Financial Year of the Consolidated Group will commence on the date specified in Recital A.</p>
+
+<p><span class="definition-term">Government Agency</span> means any government or governmental, semi‑governmental, administrative, fiscal or judicial body, department, commission, authority, tribunal, agency or entity whether foreign, federal, state, territorial or local.</p>
+
+<p><span class="definition-term">Gross Income Tax Contribution Amount</span> has the meaning set out in the Allocation Principles applicable to an Item 3 Tax-Related Liability.</p>
+
+<p><span class="definition-term">Group Liability</span> means any Tax-Related Liability of the Head Company of the Consolidated Group including any Amended Assessment of such Tax-Related Liability where a basis for determining an allocation of that Tax-Related Liability is specified in Schedule 2.</p>
+
+<p><span class="definition-term">Group Member</span> means each of the Head Company and a Contributing Member.</p>
+
+<p><span class="definition-term">GST Act</span> means <em>A New Tax System (Goods and Services Tax) Act 1999</em> (Cth), as in force from time to time.</p>
+
+<p><span class="definition-term">Head Company</span> means ${escapeXml(data.headCompanyName)} (ABN ${escapeXml(data.headCompanyABN)})${isMEC ? ' or such other Group Member as becomes the provisional head company of the Consolidated Group in accordance with clause 11.24' : ''}.</p>
+
+<p><span class="definition-term">Head Company CGT Event</span> means a CGT Event arising under Subdivision 104-L of the ITAA 1997.</p>
+
+<p><span class="definition-term">Income Tax Instalment Income</span> means instalment income within the meaning of section 995-1 of the ITAA 1997.</p>
+
+<p><span class="definition-term">ITAA</span> means, where applicable, ITAA 1936 or ITAA 1997.</p>
+
+<p><span class="definition-term">ITAA 1936</span> means the <em>Income Tax Assessment Act 1936</em> (Cth).</p>
+
+<p><span class="definition-term">ITAA 1997</span> means the <em>Income Tax Assessment Act 1997</em> (Cth).</p>
+
+<p><span class="definition-term">Item</span> means an item or items specified in column 1 of the table in subsection 721-10(2) of ITAA 1997.</p>
+
+<p><span class="definition-term">Item 3 Tax-Related Liability</span> means the Tax-Related Liability as referred to in item 3 of the table in subsection 721-10(2) of the ITAA 1997.</p>
+
+${isMEC ? '<p><span class="definition-term">MEC</span> means a MEC Group within the meaning of section 719-5 of ITAA 1997.</p>' : ''}
+
+<p><span class="definition-term">Member</span> has the same meaning as in subsection ${isMEC ? '719-25' : '703-15'} of ITAA 1997.</p>
+
+<p><span class="definition-term">Net Adjusted Income Tax Contribution Amount</span> has the meaning set out in the Allocation Principles applicable to an Item 3 Tax-Related Liability.</p>
+
+<p><span class="definition-term">Net Income Tax Contribution Amount</span> has the meaning set out in the Allocation Principles applicable to an Item 3 Tax-Related Liability.</p>
+
+<p><span class="definition-term">Notice</span> has the meaning given to that term in clause 12(a).</p>
+
+<p><span class="definition-term">Partnership</span> means a partnership as defined in subsection 995-1 of ITAA 1997.</p>
+
+${data.hasPriorTSA ? '<p><span class="definition-term">Prior TSA</span> has the meaning given to that term in clause 10.</p>' : ''}
+
+<p><span class="definition-term">Release Agreement</span> means a release agreement substantially in the form of Schedule 4 or in such other form determined by the Head Company.</p>
+
+<p><span class="definition-term">Relevant Trust</span> means in relation to a Relevant Trustee, the Trust of which the Relevant Trustee is trustee.</p>
+
+<p><span class="definition-term">Relevant Trustee</span> means a party that enters into this Agreement in the capacity as trustee of a Trust.</p>
+
+${isMEC ? '<p><span class="definition-term">Replacement Head Company</span> has the meaning given to the term in clause 11.24.</p>' : ''}
+
+<p><span class="definition-term">Significant Global Entity</span> has the same meaning as it has in section 960-555 of the ITAA 1997.</p>
+
+<p><span class="definition-term">Single Entity Rule</span> means the rule outlined in section 701-1 of the ITAA 1997.</p>
+
+<p><span class="definition-term">TAA 1953</span> means the <em>Taxation Administration Act 1953</em> (Cth).</p>
+
+<p><span class="definition-term">Tax Audit</span> has the meaning given to that term in clause 6.1.</p>
+
+<p><span class="definition-term">Tax Dispute</span> has the meaning given to that term in clause 6.2.</p>
+
+<p><span class="definition-term">Tax Funding Agreement</span> means a tax funding agreement between some or all of the Group Members relating to the funding of Group Liabilities.</p>
+
+<p><span class="definition-term">Tax-Related Disclosure</span> has the meaning given to the term in clause 6.4.</p>
+
+<p><span class="definition-term">Tax-Related Liability</span> of the Head Company has the same meaning as it has in subsection 721-10(2) of ITAA 1997.</p>
+
+<p><span class="definition-term">Tax-Related Period</span> in relation to a Tax-Related Liability, means the period specified in column 3 of the table in subsection 721-10(2) of ITAA 1997 in relation to that Tax-Related Liability.</p>
+
+<p><span class="definition-term">Treasury</span> means the treasury function of the Commonwealth of Australia.</p>
+
+<p><span class="definition-term">Trust</span> means a trust other than a public trading trust as defined in section 102R of ITAA 1936.</p>
+
+<p><span class="definition-term">TSA</span> or <span class="definition-term">Tax Sharing Agreement</span> means a tax sharing agreement for the purposes of Division 721 of ITAA 1997, as amended from time to time.</p>
+
+<h3>1.2 Construction</h3>
+
+<p>In this Agreement headings are for convenience only and do not affect the interpretation of this Agreement and, unless the context otherwise requires:</p>
+
+<ol type="a">
+<li>words importing the singular include the plural and vice versa;</li>
+<li>words importing a gender include any gender;</li>
+<li>where a word or phrase is given a particular meaning, other parts of speech and grammatical forms of a word or phrase defined in this Agreement have a corresponding meaning;</li>
+<li>an expression importing a natural person includes any individual, company, partnership, trust, joint venture, association, corporation or other body corporate and any Government Agency;</li>
+<li>no provision of this Agreement will be construed adversely to a party solely on the ground that the party was responsible for the preparation of this Agreement or that provision;</li>
+<li>an agreement, representation or warranty on the part of or in favour of two or more persons binds or is for the benefit of them severally;</li>
+<li>when the day on which something must be done is not a Business Day, that thing must be done on the preceding Business Day;</li>
+<li>in determining the time of day where relevant to this Agreement, the relevant time of day is the time of day in the place where the party required to perform the obligation is located;</li>
+<li>a reference to anything (including any right) includes a part of that thing but nothing in this clause 1.2 implies that performance of part of an obligation constitutes performance of the obligation;</li>
+<li>a reference to a clause, paragraph, party, annexure, exhibit or schedule is a reference to a clause of, paragraph of and a party, annexure, exhibit and schedule to, this Agreement and a reference to this Agreement includes any annexure, exhibit and schedule;</li>
+<li>a reference to a statute, regulation, proclamation, ordinance or by‑law includes all statutes, regulations, proclamations, ordinances or by‑laws amending, consolidating, supplementing or replacing it, and a reference to a statute includes all regulations, proclamations, ordinances and by‑laws issued under that statute;</li>
+<li>a reference to a document (including this Agreement) includes all amendments or supplements to, or replacements or novations of, that document;</li>
+<li>a reference to a party to a document includes that party's executors, administrators, successors, substitutes (including persons taking by novation) and permitted assigns;</li>
+<li>"including", "for example" or "such as" when introducing an example, does not limit the meaning of the words to which the example relates to that example or examples of a similar kind;</li>
+<li>a reference to "law" includes legislation, the rules of the general law, including common law and equity, and any judgment order or decree, declaration or ruling of a court of competent jurisdiction or Government Agency binding on a person or the assets of that person;</li>
+<li>a reference to a Tax Sharing Agreement being "valid" is a reference to the relevant Group Liability being covered by the Tax Sharing Agreement for the purposes of Division 721 of the ITAA 1997; and</li>
+<li>a reference to a monetary amount is a reference to Australian Dollars.</li>
+</ol>
 
 <div class="page-break"></div>
 
-<h1>PART B - ALLOCATION</h1>
+<h1>PART B -- ALLOCATION</h1>
+
 <h2>2. Allocation of Group Liability</h2>
+
 <h3>2.1 Consideration</h3>
 <p>In consideration for the mutual promises set out in this Agreement, each Group Member agrees to be bound by the terms and conditions set out in this Agreement.</p>
-<h3>2.2 Purpose</h3>
-<p>The purpose of the allocation provisions is to reasonably allocate each Group Liability among the Group Members using the ${data.allocationBasis === 'taxation' ? 'Notional Taxation Basis' : 'Notional Accounting Basis'} as set out in Schedule 2.</p>
+
+<h3>2.2 Purpose of Allocation Provisions</h3>
+<p>The purpose of the allocation provisions of this Agreement, as contained in this Part B (and supplemented by the other provisions of this Agreement), is to:</p>
+<ol type="a">
+<li>reasonably allocate each Group Liability among the Group Members;</li>
+<li>provide certainty in relation to such allocation so that a Group Member's Contribution Amount may be determined primarily by reference to this Part B; and</li>
+<li>meet any and all requirements for a valid Tax Sharing Agreement.</li>
+</ol>
+
+<h3>2.3 Reasonable Allocation</h3>
+<p>The amount of the Group Liability allocated to each Group Member under this Agreement represents a reasonable allocation of the total amount of the Group Liability among the Group Members immediately prior to the Due Date for that Group Liability.</p>
+
+<h3>2.4 Allocation of Group Liabilities</h3>
+<p>Subject to clause 2.5, each Group Liability with an original assessment with a Due Date after the date of this Agreement must be allocated either to, or among, the Head Company and each of the Contributing Members who were parties to this Agreement immediately prior to the Due Date of the original assessment of such Group Liability in accordance with the relevant Allocation Principles.</p>
+
+<h3>2.5 Pre-Consolidation Liabilities</h3>
+<p>Any liabilities of a Group Member to the Commissioner that relate to the period prior to that party becoming a Member of the Consolidated Group remain the liability of that Group Member.</p>
+
+<h3>2.6 Payment to Commissioner</h3>
+<p>Subject to the terms of this Agreement, if the Head Company does not pay or otherwise discharge in full a Group Liability by the Due Date, each Contributing Member will only be liable to pay the Commissioner an amount equal to the Contribution Amount of that Contributing Member for that Group Liability, and such amount will be due and payable to the Commissioner, in the circumstances set out in section 721-30(5) or (5A) of ITAA 1997, as the case may be.</p>
+
+<h3>2.7 No Debt</h3>
+<p>No Group Member may claim a debt is due from another Group Member in relation to any Contribution Amount payable by a Contributing Member to the Commissioner.</p>
+
+<h3>2.8 No Reduction for Funding Amount</h3>
+<p>The amount payable by a Contributing Member in accordance with clause 2.6 will not be reduced, increased or otherwise affected by any amount paid, payable, received or receivable by a Contributing Member under the terms of a Tax Funding Agreement or any other tax funding or contribution agreement between one or more of the Group Members.</p>
+
+<h2>3. Calculation and Recording of Contribution Amounts</h2>
+
+<h3>3.1 Calculation Advice</h3>
+<p>Immediately upon the earlier of the Head Company becoming aware of a possible default, or actual default, in the payment of part or all of a Group Liability by the relevant Due Date, the Head Company must calculate the Contribution Amount of each Group Member in respect of that Group Liability and advise each Group Member in writing of:</p>
+<ol type="a">
+<li>the amount of its Contribution Amount;</li>
+<li>the method of calculation of the amount in paragraph (a) above; and</li>
+<li>any other information it considers reasonable.</li>
+</ol>
+<p>The Contribution Amount of each Group Member as calculated by the Head Company under this clause 3.1 is binding on each Group Member except in the case of manifest error.</p>
+
+<h3>3.2 Assistance by Contributing Members</h3>
+<p>Each Contributing Member must provide the Head Company with any information it may reasonably require in relation to a Group Liability.</p>
+
+<h3>3.3 Retention of Records</h3>
+<p>Each Group Member must retain a record of each Calculation Advice (provided to, or by, it, as the case may be) for a period of not less than seven years from the date of its making.</p>
+
+<h3>3.4 Provision of Calculation Advices</h3>
+<p>Subject to the terms of this Agreement, each Contributing Member is only entitled to be given Calculation Advices that relate to that particular Contributing Member and not any Calculation Advices that relate to any other Group Member.</p>
+
+<h3>3.5 Annexures</h3>
+<p>The Head Company must attach as Annexure "A" to its counterpart of this Agreement any:</p>
+<ol type="a">
+<li>Calculation Advice issued by it to a Group Member under clause 3.1;</li>
+<li>Accession Agreement entered into by it with a new Group Member;</li>
+<li>Release Agreement entered into by it with an Exiting Member; and</li>
+<li>other document it considers relevant to the interpretation of this Agreement.</li>
+</ol>
+
+<h2>4. Clear Exit From Group Liability</h2>
+
+<h3>4.1 Exit from the Consolidated Group</h3>
+<p>This clause 4 applies if a Group Member will cease to be a Member of the Consolidated Group (<strong>Exiting Member</strong>).</p>
+
+<h3>4.2 Provision of information to Exiting Member</h3>
+<p>Prior to the date the Exiting Member ceases to be a Member of the Consolidated Group (<strong>Exit Date</strong>), the Head Company must provide the Exiting Member with a calculation (which for the avoidance of doubt may be nil) of:</p>
+<ol type="a">
+<li>if a Contribution Amount can be determined for the Exiting Member pursuant to clause 2 for a Group Liability of the Head Company with a Due Date after the Exit Date, that Contribution Amount;</li>
+<li>if a Contribution Amount cannot be determined for the Exiting Member pursuant to clause 2 for a Group Liability of the Head Company with a Due Date after the Exit Date, a reasonable estimate of that Contribution Amount;</li>
+<li>if, before the Exit Date, the Head Company anticipates that after the Exit Date there will be an Amended Assessment in respect of a Tax-Related Liability, which relates to a Tax-Related Period during which the Exiting Member was a Member of the Consolidated Group, an amount that is a reasonable estimate of the Contribution Amount of the Exiting Member that takes into account the anticipated Amended Assessment; and</li>
+<li>such other amount that Division 721 of ITAA 1997 may specify from time to time that will allow the Exiting Member to leave the Consolidated Group clear of a Group Liability.</li>
+</ol>
+
+<h3>4.3 Conclusive Evidence</h3>
+<p>The calculation by the Head Company of any Contribution Amount due under clause 4.2 is conclusive evidence of that Contribution Amount of the Exiting Member in respect to a Group Liability.</p>
+
+<h3>4.4 Payment of Contribution Amount by Exiting Member</h3>
+<p>Before the Exit Date, the Exiting Member must pay the Head Company the Contribution Amounts, if any, calculated under clause 4.2, at which time the Head Company must acknowledge receipt of such payment in writing and hold such payment separate from the other funds of the Head Company until the Due Date for each relevant Group Liability at which time the payment may be used to meet the relevant Tax-Related Liability.</p>
+
+<h3>4.5 Nil Contribution Amount</h3>
+<p>For the avoidance of doubt, if a Contribution Amount calculated pursuant to clause 4.2 is nil, the Exiting Member will be deemed to have made the relevant payment under clause 4.4.</p>
+
+<h3>4.6 Release</h3>
+<p>The Head Company and the Exiting Member must execute a Release Agreement: (a) provided that the Exiting Member has made; or (b) that is effective conditional upon the Exiting Member making, all payments required under clause 4.4. Each Group Member appoints the Head Company as its agent to enter into the Release Agreement referred to in this clause 4.6.</p>
+
+<h3>4.7 Acknowledgment</h3>
+<p>Despite anything else in this Agreement but without affecting any party's rights or obligations under this Agreement, pursuant to ITAA 1997 an Exiting Member may be liable to pay the Commissioner part or all of a Group Liability:</p>
+<ol type="a">
+<li>not covered by this Agreement due to omission or as a result of this Agreement being invalid insofar as it relates to that Group Liability;</li>
+<li>with a Due Date prior to the Exit Date;</li>
+<li>in respect of which the Exiting Member has not made a payment to the Head Company under clause 4.4 or has made a payment that is subsequently determined not to satisfy section 721-35 of ITAA 1997; or</li>
+<li>where there is an Amended Assessment of a Tax-Related Liability, which relates to any Tax-Related Period during which the Exiting Member was a Member of the Consolidated Group.</li>
+</ol>
+<p>For the avoidance of doubt, the releases provided for in the Release Agreement required under clause 4.6 are contractual obligations among the parties to this Agreement and do not affect, nor are affected by, any right of the Commissioner under ITAA.</p>
+
+<h3>4.8 Provision of Agreement to Exiting Member</h3>
+<p>Despite anything else in this Agreement, an Exiting Member may at any time, after the Exit Date, request that the Head Company provide it with a copy of this Agreement and the Head Company must immediately on such demand provide that Exiting Member with a copy of this Agreement in the approved form and any Annexures to it together with any other documents or information necessary for its validity as a TSA under Division 721 of ITAA 1997.</p>
+
+<h3>4.9 No Prejudice</h3>
+<p>The Head Company and the Exiting Member agree and acknowledge that the Exiting Member does not, or will not, cease to be a Group Member under an arrangement, a purpose of which is to prejudice the recovery by the Commissioner of some or all of the amount of any Group Liability.</p>
+
+${isMEC ? `<h3>4.10 Exit by Provisional Head Company</h3>
+<p>Subject to clause 4.10(b), where the Exiting Member is or was a provisional head company of the Consolidated Group in a relevant Financial Year, a reference to Head Company in this clause 4 is to be read as a reference to the Group Member that is the provisional head company of the Consolidated Group at the time that Exiting Member leaves the Consolidated Group.</p>
+<p>If there is more than one provisional head company of the Consolidated Group in the relevant Financial Year:</p>
+<ol type="i">
+<li>all amounts paid under clause 4.4 will be deemed to be paid by the Exiting Member to the Group Member that is determined to be the head company of the Consolidated Group for the relevant Financial Year under section 719-75 of ITAA 1997 (the <strong>FY Head Company</strong>), and any payment received during the Financial Year by a different recipient head company will be deemed to have been received as agent for the FY Head Company; and</li>
+<li>each outgoing provisional head company which received any amount under clause 4.4 must pay that amount to the next Group Member that is appointed as the provisional head company of the Consolidated Group in the relevant Financial Year.</li>
+</ol>` : ''}
 
 <div class="page-break"></div>
 
-<h1>PART C - MISCELLANEOUS</h1>
+<h1>PART C -- MISCELLANEOUS</h1>
+
+<h2>5. Provision of Tax Sharing Agreement to Commissioner</h2>
+
+<h3>5.1 Obligation to Provide</h3>
+<p>The Head Company must provide the Commissioner with a copy of this Agreement in the approved form and any Annexures to it together with any other documents or information necessary for its validity as a TSA under Division 721 of ITAA 1997 within 14 days of notice given by the Commissioner pursuant to subsection 721-25(3) of ITAA 1997 or as otherwise required.</p>
+
+<h3>5.2 Extension of Time</h3>
+<p>If the Head Company is unable to provide to the Commissioner a copy of this Agreement in accordance with clause 5.1, the Head Company must apply, pursuant to ITAA 1997, to the Commissioner for an extension of time to lodge a copy of this Agreement and other documents contemplated in clause 5.1.</p>
+
+<h3>5.3 Indemnity</h3>
+<p>The Head Company indemnifies each Member of the Consolidated Group for any Group Liability or other amount incurred or increased as a result of its failure to comply with its obligations under clause 5.1 or 5.2.</p>
+
+<h3>5.4 Provision of Notice to other Group Members</h3>
+<p>Within three days of the receipt of a notice given by the Commissioner pursuant to subsection 721-25(3) of ITAA 1997, the Head Company must give a copy of such notice to all other Group Members.</p>
+
+<h3>5.5 Provision by Contributing Member as Agent of Head Company</h3>
+<p>Despite anything in this clause 5, if the Head Company is given a notice by the Commissioner pursuant to subsection 721-25(3) of ITAA 1997 and a Contributing Member provides a copy of this Agreement, any Annexures to it or documents or information referred to in clause 5.1 to the Commissioner within the time required by that notice, the Contributing Member is, by this Agreement, appointed agent of the Head Company for the purpose of complying with that notice and the Contributing Member is taken to have given the copy of this Agreement or such other documents to the Commissioner both on its own behalf and as agent of the Head Company.</p>
+
+<h3>5.6 Provision by Contributing Member</h3>
+<p>If a Contributing Member is given a notice by the Commissioner pursuant to subsection 721-15(5) of ITAA 1997, the Head Company must immediately on demand provide that Contributing Member with a copy of this Agreement in the approved form and any Annexures to it together with any other documents or information necessary for its validity as a TSA under Division 721 of ITAA 1997.</p>
+
+<h2>6. Tax Audits and Disputes</h2>
+
+<h3>6.1 Audit</h3>
+<p>If the Commissioner commences an examination of, inquiry into or audit of a Group Liability (<strong>Tax Audit</strong>) for any Tax-Related Period in respect of which a Contributing Member was part of the Consolidated Group, that Contributing Member must provide such documents, information, explanations and assistance to the Head Company relating to the Group Liability or the Tax Audit as the Head Company may reasonably request and must fully co-operate with the Head Company in its management of the Tax Audit.</p>
+
+<h3>6.2 Disputes</h3>
+<p>If any dispute (<strong>Tax Dispute</strong>), including but not limited to any legal proceedings, arises in relation to a Group Liability for any Tax-Related Period in respect of which a Contributing Member was part of the Consolidated Group, that Contributing Member must provide such documents, information, explanations and assistance to the Head Company relating to the Group Liability or the Tax Dispute as the Head Company requires in its management of the Tax Dispute.</p>
+
+<h3>6.3 Provision of Information to Contributing Member</h3>
+<p>If any Contributing Member becomes liable to pay to the Commissioner the whole or any portion of a Group Liability for any Tax-Related Period, either by reason of section 721-15 of ITAA 1997 or under this Agreement, the Head Company must provide such information to the Contributing Member relating to the Group Liability as the Contributing Member may reasonably request and must fully co-operate with the Contributing Member in relation to payment of, or disputing, the liability.</p>
+
+<h3>6.4 Agency</h3>
+<p>Each Contributing Member appoints the Head Company as its agent in respect of all matters concerning its compliance with the ITAA or related legislation (including, but not limited to, Tax Audits and Tax Disputes) and covenants with the Head Company and with each other Contributing Member that it will not knowingly, and otherwise than in the ordinary course of its business, make any statement or do, or omit to do, any thing (including disclosing to the Commissioner any information or document) (<strong>Tax-Related Disclosure</strong>) that could reasonably be expected to have the effect of increasing any Group Liability of the Head Company or any Contribution Amount of another Contributing Member, without the express prior approval of the Head Company. The appointment by a Contributing Member under this clause 6.4 automatically ceases upon such Contributing Member ceasing to be a Member of the Consolidated Group.</p>
+
+<h3>6.5 Disclosure by Law</h3>
+<p>If a Contributing Member is required by any law, or by notice given under any law, to make a Tax-Related Disclosure to another person: (a) clause 6.4 does not apply to the making of that Tax-Related Disclosure, provided that the Contributing Member has used its best endeavours to obtain the prior approval of the Head Company to make that Tax-Related Disclosure; and (b) the Head Company must not withhold its approval to make that Tax-Related Disclosure, and in making such disclosure, each Contributing Member shall (unless the Head Company determines it is not reasonable or necessary) act in a manner to preserve available legal professional privilege in any document requested by a third party including the Commissioner.</p>
+
+<h3>6.6 Communications with Commissioner</h3>
+<p>The Head Company may make any disclosures, requests for amendment of any return or similar communication to the Commissioner as it considers appropriate, having regard to its legal obligations.</p>
+
+<h2>7. Dispute Resolution</h2>
+
+<h3>7.1 Dispute Resolution</h3>
+<p>Any dispute between the parties in relation to this Agreement, or the rights and/or obligations arising pursuant to it, to the extent it is not governed specifically by another provision of this Agreement, must be dealt with in accordance with this clause 7.</p>
+
+<h3>7.2 Notice of Dispute</h3>
+<p>Any party who claims that a dispute within the meaning of clause 7.1 has arisen must, within five Business Days of becoming aware of such dispute, serve written notice upon all other parties to this Agreement in accordance with clause 12 and in such notice provide full particulars of the dispute and any/or all claims made by that party and alleged to arise pursuant to the dispute.</p>
+
+<h3>7.3 Referral of Dispute</h3>
+<p>Upon receipt of a notice pursuant to clause 7.2, the Head Company must refer the dispute to: (a) any person agreed to by the parties to the dispute; or (b) failing such agreement, an expert nominated and appointed in accordance with, and subject to, the Resolution Institute Expert Determination Rules, (the person to whom the dispute is referred is the <strong>Dispute Expert</strong>).</p>
+
+<h3>7.4 Expeditious Determination</h3>
+<p>The parties must use best endeavours to procure that the Dispute Expert expeditiously determines the subject matter of the dispute in such manner as he or she reasonably determines.</p>
+
+<h3>7.5 Binding Decision</h3>
+<p>Except in the case of manifest error, the parties are bound by the decision of the Dispute Expert, including any order as to costs.</p>
+
+<h3>7.6 Court Proceedings</h3>
+<p>This clause 7 does not constrain the Head Company from commencing proceedings in a Court of competent jurisdiction against any Group Member who fails to make a payment required by clause 4 for recovery of such payment as a liquidated debt.</p>
+
+<h2>8. Changes to the Law</h2>
+
+<h3>8.1 Parties to Act in Good Faith</h3>
+<p>If a change occurs (including, but not limited to for the purpose of this clause 8, a change that occurs because a regulation is made for the purposes of section 721-25(1)(d) of ITAA 1997) to a law or policy of the Commissioner that applies to this Agreement in a manner that: (a) affects the legal or practical effect that, but for that change, this Agreement would have had; or (b) results in this Agreement not covering all Group Liabilities for the purposes of section 721-25 of ITAA 1997, then as soon as practicable after becoming aware of the change, the Contributing Members must act in good faith with the Head Company to determine and make such changes (if any) to this Agreement as may be necessary to restore the legal or practical effect referred to in paragraph (a) or to ensure that this Agreement does not have the result referred to in paragraph (b).</p>
+
+<h3>8.2 Deemed Amendment</h3>
+<p>Despite clause 8.1, if a change to a law or policy of the Commissioner occurs that applies to this Agreement in a manner that results in this Agreement not covering all Group Liabilities for the purposes of section 721-25 of ITAA 1997, this Agreement is deemed to be amended from the date such law came into effect, so that the relevant Group Liability not covered will be covered and allocated among the Group Members on the same basis as if it were an Item 3 Tax-Related Liability.</p>
+
+<h2>9. Precedence of Regulations</h2>
+
+<h3>9.1 Variations</h3>
+<p>The parties must make such variations to this Agreement as may be necessary to ensure this Agreement: (a) complies with any regulations made under paragraph 721-25(1)(d) of ITAA 1997; or (b) is a valid Tax Sharing Agreement within the contemplation of section 721-25 of ITAA 1997 and any policy of the Commissioner.</p>
+
+<h3>9.2 No Agreement</h3>
+<p>If the parties are unable to agree on any variations as contemplated by clause 9.1, the parties must appoint a Dispute Expert. The Dispute Expert may decide the necessary variations and the Dispute Expert's decision is final and binding on the parties (except in the case of manifest error). The parties must instruct the Dispute Expert to reach a decision as expeditiously as possible and to communicate his or her decision in writing to the parties.</p>
+
+<h3>9.3 Variation by Dispute Expert</h3>
+<p>This Agreement is deemed to be varied in accordance with the decision of the Dispute Expert effective from the date specified in the decision. The Group Members must share the costs of the Dispute Expert equally, unless prior agreement can be reached between the parties.</p>
+
+<h3>9.4 Deemed Incorporation of rules and regulations</h3>
+<p>Subject to clause 9.4(b), if the Commissioner or the Treasury issues any ruling or makes any regulation: (i) stipulating any matter which must or must not be included in a TSA; or (ii) which states what will be acceptable as a means of calculating a liability to income tax; or (iii) which in any other way regulates what a TSA must contain or must not contain, then this Agreement is deemed to incorporate any such ruling or regulation to the extent necessary to preserve or achieve validity of this Agreement as a TSA under Division 721 of ITAA 1997 and any policy of the Commissioner from the date of effect of such ruling or regulation, and to the extent that any provision of this Agreement is inconsistent with such ruling or regulation, the provisions of the ruling or regulation will prevail.</p>
+<p>If the ruling or regulation prescribes alternatives for preserving or achieving such validity, this Agreement is deemed to incorporate the alternative most consistent with the pre-existing terms of this Agreement.</p>
+
+${data.hasPriorTSA ? `<h2>10. Prior Tax Sharing Agreement</h2>
+<h3>10.1 Relationship between TSA's</h3>
+<p>The Tax Sharing Agreement entered into between the Head Company and other members of the Consolidated Group on [insert date] (<strong>Prior TSA</strong>): (a) does not apply to any Group Liability for which the Head Company's original Due Date is after the date of this Agreement; and (b) despite anything in this Agreement, continues to apply to a Group Liability with a Due Date after the date of this Agreement where the original Due Date of that Group Liability was on or before the date of this Agreement.</p>
+<p>This Agreement: (a) applies to each Group Liability with an original Due Date after the date of this Agreement; and (b) despite anything in this Agreement, does not apply to any Group Liability in relation to which the Prior TSA applies.</p>` : ''}
+
 <h2>11. Miscellaneous</h2>
-<h3>11.5 Governing Law</h3>
-<p>This Agreement is governed by the laws of ${data.jurisdiction}.</p>
+
+<h3>11.1 Amendment</h3>
+<p>The Group Members (other than any Exiting Member released pursuant to clause 4.6 or a Group Member that has been liquidated, deregistered, wound up or dissolved) may at any time amend, vary or replace this Agreement by written agreement, but not so as to adversely affect the obligations or rights of any Exiting Member released pursuant to clause 4.6.</p>
+<p>An amendment, variation or replacement of this Agreement by written agreement under clause 11.1(a) is deemed to have been made between all Group Members if no Group Member has objected in writing to the proposed amendment or variation within seven days of receipt of a notice from the Head Company setting out the proposed amendment or variation.</p>
+<p>An amendment, variation or replacement of this Agreement does not apply to a Group Liability with an original Due Date on or prior to the date of that amendment, variation or replacement.</p>
+<p>Each Contributing Member appoints the Head Company as its attorney for the purpose of executing any amendment, variation or replacement of this Agreement under clause 11.1(a).</p>
+
+<h3>11.2 GST</h3>
+<p><strong>Definitions:</strong> In this clause 11.2, the expressions "adjustment note", "consideration", "GST", "supply", "tax invoice", "supplier", "recipient", and "taxable supply" have the meaning given to those expressions in the GST Act. For the avoidance of doubt, "GST" excludes any penalties or additional tax imposed in relation to the GST.</p>
+<p><strong>Sums exclude GST:</strong> Unless otherwise expressly stated, the consideration to be provided or payment obligation under this Agreement is exclusive of GST.</p>
+<p><strong>Responsibility for GST:</strong> Despite any other provision in this Agreement, if GST is imposed on any supply made under this Agreement, the recipient must pay to the supplier any amount equal to the GST payable on the supply. The recipient must pay the amount in addition to and at the same time as payment for the supply is required to be made under this Agreement. The supplier must pay any GST penalties, interest or additional tax imposed on the supplier and attributable to its act or omission.</p>
+<p><strong>Tax invoice:</strong> If a supply is made to which GST applies or is varied under this Agreement, the supplier must provide to the recipient of the supply a valid tax invoice or adjustment note at or before the time of payment or variation.</p>
+<p><strong>Adjustment:</strong> If the amount of GST paid or payable by the supplier on any supply made under this Agreement differs from the amount of GST paid by the recipient, because the Commissioner lawfully adjusts the value of the taxable supply for the purpose of calculating GST, then the amount of GST paid by the recipient must be adjusted accordingly by a further payment by the recipient to the supplier or the supplier to the recipient, as the case requires.</p>
+
+<h3>11.3 Additional Contributing Members</h3>
+<p>Each Contributing Member appoints the Head Company as its agent to execute an Accession Agreement as contemplated by clause 11.3(b)(ii).</p>
+<p>If a new Member joins the Consolidated Group, the Head Company must: (i) procure the new Member to promptly execute an Accession Agreement; (ii) promptly sign (on its own behalf and on behalf of all of the Contributing Members at the time) that Accession Agreement; (iii) perform any actions necessary to ensure that the new Member's membership of the Consolidated Group does not prejudice the validity of this Agreement as a TSA; and (iv) procure the new Member to perform any actions necessary to ensure that the new Member's membership of the Consolidated Group does not prejudice the validity of this Agreement as a TSA.</p>
+<p>If a new Member becomes a Contributing Member under clause 11.3(b), that new Member becomes a Contributing Member on the date of the relevant Accession Agreement.</p>
+
+<h3>11.4 Termination</h3>
+<p>This Agreement commences on the date of this Agreement and continues until: (i) terminated by mutual agreement of the parties (other than a party that has previously been released pursuant to clause 4.6, has been deregistered, wound up, liquidated or dissolved); or (ii) the Due Date for all Group Liabilities has passed after the Consolidated Group ceases to exist.</p>
+<p>The termination of this Agreement does not affect the rights, obligations and liabilities of any party that have accrued up to the date of termination or the enforceability of any clause relating to any Tax-Related Period, or part thereof, up to the date of termination.</p>
+
+<h3>11.5 Governing Law and Jurisdiction</h3>
+<p>This Agreement is governed by the laws of ${escapeXml(data.jurisdiction)}.</p>
+<p>Each party irrevocably and unconditionally submits to the non-exclusive jurisdiction of the courts of ${escapeXml(data.jurisdiction)} and any courts which have jurisdiction to hear appeals from any of those courts in respect of any proceedings in connection with this Agreement.</p>
+<p>Each party waives any right it has to object to an action being brought in the courts of ${escapeXml(data.jurisdiction)} including, without limitation, by claiming that the action has been brought in an inconvenient forum or that those courts do not have jurisdiction.</p>
+
+<h3>11.6 Prohibition or enforceability</h3>
+<p>Any provision of, or the application of any provision of this Agreement, which is prohibited, void, illegal or unenforceable in any jurisdiction: (i) is, in that jurisdiction, ineffective only to the extent to which it is void, illegal, unenforceable or prohibited; (ii) does not affect the validity, legality or enforceability of that provision in any other jurisdiction or of the other provisions of this Agreement in that or any other jurisdiction; and (iii) is severable from this Agreement and will not affect the other provisions of this Agreement.</p>
+<p>The application of this clause 11.6 is not limited by any other provision of this Agreement in relation to severability, prohibition or enforceability.</p>
+<p>This Agreement constitutes a separate Tax Sharing Agreement (for the purposes of subsection 721-15(3) of the ITAA 1997) in respect of each Group Liability.</p>
+
+<h3>11.7 Waivers</h3>
+<p>A waiver of any right, power, authority, discretion or remedy arising upon a breach of or default under this Agreement must be in writing and signed by the party granting the waiver.</p>
+<p>A failure or delay in the exercise, or partial exercise, of a right, power, authority, discretion or remedy arising from a breach of or default under this Agreement, does not prevent the exercise of or result in a waiver of that right, power, authority, discretion or remedy at a later time.</p>
+
+<h3>11.8 Third party rights</h3>
+<p>No person other than the parties has or is intended to have any right, power or remedy or derives or is intended to derive any benefit under this Agreement.</p>
+
+<h3>11.9 Non-merger</h3>
+<p>No provision of this Agreement merges on execution or termination.</p>
+
+<h3>11.10 Costs and Stamp Duty</h3>
+<p>Except as expressly set out in this Agreement, the Group Members must pay their own costs and expenses of and in connection with the negotiation, preparation, execution, stamping, registration and completion of this Agreement and of any document contemplated by this Agreement.</p>
+
+<h3>11.11 Further Acts</h3>
+<p>Each Group Member must, without further consideration, sign, execute and deliver any document and will perform any other act which may be necessary or desirable to give full effect to this Agreement.</p>
+
+<h3>11.12 Entire Agreement</h3>
+<p>This Agreement embodies the entire agreement between the parties with respect to the subject matter of this Agreement and${data.hasPriorTSA ? ', other than as provided for in clause 10,' : ''} supersedes any prior negotiation, arrangement, understanding or agreement with respect to the subject matter or any term of this Agreement.</p>
+
+<h3>11.13 Partial Exercise of Rights</h3>
+<p>No single or partial exercise by any party of any right, power or remedy under this Agreement precludes any other or further exercise of that or any other right, power or remedy.</p>
+
+<h3>11.14 No Exclusion of Rights</h3>
+<p>The rights, powers or remedies provided in this Agreement are cumulative with and not exclusive of any rights, powers or remedies provided independently of this Agreement.</p>
+
+<h3>11.15 Indemnity</h3>
+<p>Each indemnity contained in this Agreement is a continuing obligation despite a settlement of account or the occurrence of anything, and remains in full force and effect until all money owing, contingently or otherwise, under an indemnity has been paid in full.</p>
+<p>Each indemnity contained in this Agreement: (i) is an additional, separate and independent obligation of the party giving the indemnity and no one indemnity limits the generality of any other indemnity; and (ii) survives the termination of this Agreement.</p>
+
+<h3>11.16 Powers of Attorney</h3>
+<p>If this Agreement is executed under power of attorney, each of the attorneys executing this Agreement warrants that he or she has at the time of executing this Agreement no notice of revocation of the power of attorney under the authority of which he or she executes this Agreement.</p>
+
+<h3>11.17 Counterparts</h3>
+<p>This Agreement may be executed in any number of counterparts. All counterparts, taken together, constitute one instrument. A party may execute this Agreement by signing any counterpart. The date of this Agreement is the date the relevant party executes the final counterpart.</p>
+
+<h3>11.18 Successors and Assigns</h3>
+<p>This Agreement enures to the benefit of, and is binding upon, each of the parties and their respective successors.</p>
+
+<h3>11.19 No Assignment or Novation</h3>
+<p>A party may not assign or novate this Agreement or otherwise transfer the benefit of this Agreement or an obligation, right or remedy under it, without the prior written consent of the other parties which consent will not be unreasonably withheld or delayed.</p>
+
+<h3>11.20 Limitation on liability</h3>
+<p>Each Relevant Trustee enters into this Agreement only in its capacity as trustee of the Relevant Trust and in no other capacity. A liability arising under or in connection with this Agreement is limited to and can be enforced against a Relevant Trustee only to the extent to which it can be satisfied out of the property of the Relevant Trust out of which the Relevant Trustee is actually indemnified for the liability.</p>
+
+<h3>11.21 Good Faith</h3>
+<p>Each of the Group Members must: (a) act in good faith towards all other Group Members; and (b) do all things necessary to comply with this Agreement.</p>
+
+<h3>11.22 Failure to Consolidate</h3>
+<p>If the Head Company fails to make a choice in writing in accordance with section ${isMEC ? '719-50(1)' : '703-50(1)'} of ITAA 1997 such that the Consolidated Group is not formed effective from ${consolidationDate}, then this Agreement is rescinded and each party must do all things necessary to put each other party in the same position as if it had not entered this Agreement, including without limitation, returning any payments made in accordance with this Agreement.</p>
+
+<h3>11.23 Parties Remain Bound</h3>
+<p>For the avoidance of doubt, if a Contributing Member ceases to be a Member of the Consolidated Group by a sale of its shares or otherwise, the remaining Group Members remain bound by the terms of this Agreement.</p>
+
+<h3>11.24 Time of the Essence</h3>
+<p>Time is of the essence in this Agreement.</p>
+
+${isMEC ? `<h3>11.25 Change in Head Company</h3>
+<p>Where the Head Company ceases to be eligible to be the provisional head company, within the meaning of section 719-65 of ITAA 1997, the remaining eligible tier-1 companies (as defined by section 719-15 of ITAA 1997) must unanimously nominate one of their members to be the new Head Company within 28 days (<strong>Replacement Head Company</strong>) to the extent this company will satisfy the requirements under section 719-60 and section 719-65. Once such nomination takes place, all references in this Agreement to the Head Company must be read as references to the Replacement Head Company for the entire Financial Year during which that nomination took place.</p>` : ''}
+
+<h3>${isMEC ? '11.26' : '11.25'} Execution permitted by Electronic Signature</h3>
+<p>A party (including any signatory for a party) may execute this Agreement by Electronic Signature.</p>
+<p>Each party: (i) consents to the use of Electronic Signature by a party (including any signatory for a party) and receiving this Agreement wholly or partly in electronic or digital form; (ii) acknowledges that the use of Electronic Signature is an appropriately reliable method for the purposes of this Agreement to identify each signatory for each party and to indicate that signatory's intention in respect of the contents of this Agreement; (iii) acknowledges that a requirement for this Agreement (or any document, notice or communication under it) to be executed may be satisfied by Electronic Signature; (iv) warrants that, if this document (including any counterpart of it) has been executed using an Electronic Signature, they have applied (or their duly authorised signatories have applied) the Electronic Signature to this document, or approved the application of the Electronic Signature to this document on their behalf; and (v) agrees that Electronic Signature is legally effective execution and conclusive as to their intention to be bound by this Agreement as if signed by that party's (or any of its duly authorised signatory's) manuscript signature.</p>
+
+<h2>12. Notices</h2>
+
+<h3>12(a) Form of communication</h3>
+<p>Unless expressly stated otherwise in this Agreement, any notice, certificate, consent, request, demand, approval, waiver or other communication (<strong>Notice</strong>) must be: (i) in legible writing and in English; (ii) signed by the sender (if an individual) or where the sender is a company, signed by an officer or in accordance with section 127 of the Corporations Act; and (iii) marked for the attention of and addressed to the addressee.</p>
+<p>A Notice can be relied upon by the addressee and the addressee is not liable to any other person for any consequences of that reliance if the addressee believes it to be genuine, correct and authorised by the sender.</p>
+
+<h3>12(b) Delivery of Notices</h3>
+<p>Notices must be hand delivered or sent by prepaid express post (next day delivery) or email to the addressee's address for notices specified in the 'Parties' section or Schedule 1 of this Agreement or to any other address or email a party notifies to the other parties under this clause 12.</p>
+
+<h3>12(c) When Notice is effective</h3>
+<p>Notices take effect from the time they are received or taken to be received under clause 12(d) (whichever happens first) unless a later time is specified.</p>
+
+<h3>12(d) When Notice taken to be received</h3>
+<p>Notice is taken to be received by the addressee if by: (i) delivery in person, when delivered to the addressee; (ii) prepaid express post, on the second Business Day after the date of posting or if by post, three Business Days after the date of postage; (iii) subject to 12(e)(i), facsimile transmission, at the time shown in the transmission report generated by the machine from which the facsimile was sent; and (iv) subject to 12(e)(i), electronic mail (e-mail), four hours after the sent time (as recorded on the sender's e-mail server), unless the sender receives a notice from the recipient's email server or internet service provider that the message has not been delivered to the recipient.</p>
+
+<h3>12(e) Legible Notices and receipt outside business hours</h3>
+<p>A facsimile transmission or e-mail is regarded as legibly received unless the addressee telephones the sender within four hours after the transmission or e-mail is received or regarded as received under clause 12(d) and informs the sender that it is not legible.</p>
+<p>Despite clauses 12(c) and 12(d), if Notices are received or taken to be received under this clause 12 after 4:00pm in the place of receipt or on a non-Business Day, they are taken to be received at 9:00am (recipient's time) on the following Business Day and take effect from that time unless a later time is specified in the Notice.</p>
+
+<h2>13. Representations and Warranties</h2>
+
+<h3>13.1 Representations by all parties</h3>
+<p>Each party represents and warrants to each other party: (i) <strong>status</strong>: it is validly existing under the laws of the place of its incorporation or creation; (ii) <strong>power</strong>: it has the power to enter into and perform its obligations under this Agreement and to carry out the transactions contemplated by this Agreement; (iii) <strong>authorisations</strong>: it has taken all necessary action to authorise the entry into and performance of this Agreement; (iv) <strong>binding</strong>: this Agreement is valid and binding and enforceable against it in accordance with its terms; (v) <strong>transactions permitted</strong>: the execution and performance by it of this Agreement does not and will not violate in any respect a provision of: (A) a law or treaty or a judgment, ruling, order or decree binding on it; (B) its rules or other constituent documents; (C) any other document or agreement which is binding on it or its assets; (vi) <strong>no arrangement</strong>: it has not entered into this Agreement as part of an arrangement any purpose of which was to prejudice the recovery by the Commissioner of some or all of the amount of any Group Liability or liabilities of that kind; (vii) <strong>allocation</strong>: it is aware that its allocation of a Group Liability under this Agreement may be more, or less, than the taxation amounts it would otherwise be liable for if it were not a Member of the Consolidated Group; and (viii) <strong>Partnership or Trust</strong>: if entering into this Agreement in its capacity as a Relevant Trustee or a partner of a Partnership, it is authorised to enter into this Agreement in such capacity and by doing so is authorised to bind the Relevant Trust or Partnership (as appropriate).</p>
+
+<h3>13.2 Head Company warranties</h3>
+<p>The Head Company warrants that it satisfies the statutory requirements specified for a head company of a Consolidated Group as set out in section ${isMEC ? '719-65' : '703-15'} of ITAA 1997.</p>
+
+<h3>13.3 Contributing Member warranties</h3>
+<p>Each Contributing Member warrants that it satisfies the statutory requirements specified for a subsidiary member for a Consolidated Group as set out in section ${isMEC ? '719-10 or section 719-5' : '703-15'} of ITAA 1997, of which the Head Company is the head company.</p>
 
 <div class="page-break"></div>
 
-<h1>Schedule 1 - Contributing Members</h1>
-${members.length > 0 ? `
-<table>
-<tr><th>Member Name</th><th>ABN</th><th>Address</th></tr>
-${members.map(m => `<tr><td>${m.name}</td><td>${m.abn}</td><td>${m.address}</td></tr>`).join('\n')}
-</table>
-` : '<p><em>No contributing members added</em></p>'}
+<h1>Schedule 1 -- Contributing Members</h1>
 
-<h1>Schedule 2 - Allocation Principles</h1>
-<p>The Item 3 Tax-Related Liability will be allocated using the <strong>${data.allocationBasis === 'taxation' ? 'Notional Taxation Basis' : 'Notional Accounting Basis'}</strong> as set out in the complete PwC TSA template.</p>
+${members.length > 0 ? `<table>
+<tr><th>Member Name</th><th>ABN / ACN</th><th>Address and E-mail</th></tr>
+${members.map(m => `<tr><td>${escapeXml(m.name)}</td><td>${escapeXml(m.abn)}</td><td>${escapeXml(m.address)}</td></tr>`).join('\n')}
+</table>` : '<p><em>No contributing members have been added to this agreement.</em></p>'}
+
+<div class="page-break"></div>
+
+<h1>Schedule 2 -- Allocation Principles</h1>
+
+<p>The Allocation Principles for each of the Tax-Related Liabilities of the Head Company are as set out below.</p>
+
+<h3>Tax-Related Liability: Item 5 subsection 721-10(2) of ITAA 1997 -- section 197-70 of ITAA 1997 (untainting tax)</h3>
+<p><strong>Allocation Principles:</strong> The Group Member which made the election under section 197-55 of ITAA 1997 must pay the whole of this Tax-Related Liability.</p>
+
+<h3>Tax-Related Liability: Items 10, 15, 20, 22 subsection 721-10(2) of ITAA 1997 (franking tax)</h3>
+<p><strong>Allocation Principles:</strong> The Head Company must pay the entire amount of each of these Tax-Related Liabilities.</p>
+
+<h3>Tax-Related Liability: Item 3 subsection 721-10(2) of ITAA 1997 -- section 5-5 of ITAA 1997 (income tax)</h3>
+<p><strong>Allocation Principles:</strong> The Contribution Amount for each Group Member in respect to the Item 3 Tax-Related Liability will be determined based on a Notional ${data.allocationBasis === 'taxation' ? 'Taxation' : 'Accounting'} Basis as set out below:</p>
+
+${data.allocationBasis === 'taxation' ? `
+<h4>Notional Taxation Basis</h4>
+<ol type="a">
+<li>An amount reflecting the notional income, or loss, as the case may be, for taxation for each Member of the Consolidated Group for the relevant year of income will be determined assuming that each was a stand alone entity and not a Member of the Consolidated Group.</li>
+<li>The notional income, or loss, of a Member who was not a party to this Agreement prior to the Due Date of the original assessment of the Tax-Related Liability will be added to the notional income, or loss, of the Head Company as part of the calculation under (a) above.</li>
+<li>If the determination in (a) and (b) above results in a Group Member having a notional loss then: (i) such loss will be notionally transferred to each Group Member with a notional income pro-rata in proportion to the amount by which such Group Member's notional income bears to the notional income of all Group Members whose notional income is greater than zero; and (ii) that Group Member's notional taxation liability will be zero.</li>
+<li>The notional taxation liability of a Member will be determined by multiplying the notional income of that Member by the tax rate applicable to the Consolidated Group.</li>
+<li>The Tax-Related Liability will be allocated among each Group Member in proportion to the amount which that Group Member's notional taxation liability bears to the aggregate notional taxation liability of all Group Members.</li>
+<li>The amount so allocated to each Group Member is its Gross Income Tax Contribution Amount.</li>
+<li>The Gross Income Tax Contribution Amount of each Group Member will then be reduced by: (i) any Contribution Amounts for Items 30, 32 and 35 Tax-Related Liabilities allocated to it in respect of that year of income; and (ii) any other amounts paid or payable by that Group Member for which the Head Company has, does or will receive a credit under section 45‑30 in Schedule 1 to TAA 1953 for that income year; or a credit under section 45‑865 in Schedule 1 to TAA 1953 for that income year.</li>
+<li>The amount so allocated to each Group Member is its Net Income Tax Contribution Amount.</li>
+<li>If any Group Member's Net Income Tax Contribution Amount is less than or equal to zero: (i) such Net Income Tax Contribution Amount will be notionally transferred to each Group Member with a Net Income Tax Contribution Amount of greater than zero, pro rata in proportion to the amount by which such Group Member's Net Income Tax Contribution Amount bears to the Net Income Tax Contribution Amounts of all Group Members whose Net Income Tax Contribution Amounts are greater than zero; and (ii) that Group Member's Net Adjusted Income Tax Contribution Amount will be zero.</li>
+<li>The amount so allocated to each Group Member is its Net Adjusted Income Tax Contribution Amount.</li>
+<li>The Tax-Related Liability will then be reduced by the amount of: (i) any credit under section 45-30 in Schedule 1 of TAA 1953 for that income year; and (ii) any credit under section 45-865 in Schedule 1 of TAA 1953 for that income year, (the <strong>721-25(1A) Adjusted Tax Related Liability</strong>).</li>
+<li>The 721-25(1A) Adjusted Tax Related Liability will be allocated between each Group Member in proportion to the amount which that Group Member's Net Adjusted Income Tax Contribution Amount bears to the aggregate Net Adjusted Income Tax Contribution Amounts of all Group Members.</li>
+<li>The amount so allocated to each Group Member is its Contribution Amount.</li>
+</ol>
+` : `
+<h4>Notional Accounting Basis</h4>
+<ol type="a">
+<li>The notional profit or loss before tax of each Member of the Consolidated Group will be determined based on the accounts of each such Member in the relevant year of income.</li>
+<li>An adjustment will be made to the amount calculated at paragraph (a) to: (i) eliminate any transactions between Members; and (ii) exclude, where the Member is a Trust or Partnership, any amounts that would be included in determining the profit before tax of another Member as a stand alone entity by virtue of that Member being a beneficiary of the Trust or a partner in the Partnership, as the case may be.</li>
+<li>Any income or expenses that are referrable to part of the relevant year of income in which the Member was not part of the Consolidated Group which will be apportioned on a reasonable basis to the period during which the Member was not a Member of the Consolidated Group.</li>
+<li>The notional profit or loss before tax of a Member who was not a party to this Agreement prior to the Due Date of the original assessment of the Tax-Related Liability will be added to notional profit or loss before tax of the Head Company.</li>
+<li>If after applying the above paragraphs a Group Member has a notional loss then: (i) such loss will be notionally transferred to each Group Member with a notional profit pro-rata in proportion to the amount by which such Group Member's notional profit bears to the notional profits of all Group Members whose notional profit is greater than zero; and (ii) that Group Member's profit or loss before tax will be zero.</li>
+<li>The Tax Related Liability will be allocated among each Group Member based on the proportion that the notional profit or loss before tax of each Group Member bears to the sum of the notional profit or loss before tax for all Group Members.</li>
+<li>The amount so allocated to each Group Member is its Gross Income Tax Contribution Amount.</li>
+<li>The Gross Income Tax Contribution Amount of each Group Member will then be reduced by: (i) any Contribution Amounts for Items 30, 32 and 35 Tax Related Liabilities allocated to it in respect of that year of income; (ii) any other amounts paid or payable by that Group Member for which the Head Company has, does or will receive a credit under section 45‑30 in Schedule 1 to TAA 1953 for that income year; or a credit under section 45‑865 in Schedule 1 to TAA 1953 for that income year.</li>
+<li>The amount so allocated to each Group Member is its Net Income Tax Contribution Amount.</li>
+<li>If any Group Member's Net Income Tax Contribution Amount is less than or equal to zero: (i) such Net Income Tax Contribution Amount will be notionally transferred to each Group Member with a Net Income Tax Contribution Amount of greater than zero, pro rata in proportion to the amount by which such Group Member's Net Income Tax Contribution Amount bears to the Net Income Tax Contribution Amounts of all Group Members whose Net Income Tax Contribution Amounts are greater than zero; and (ii) that Group Member's Net Adjusted Income Tax Contribution Amount will be zero.</li>
+<li>The amount so allocated to each Group Member is its Net Adjusted Income Tax Contribution Amount.</li>
+<li>The Tax-Related Liability will then be reduced by the amount of: (i) any credit under section 45-30 in Schedule 1 of TAA 1953 for that income year; and (ii) any credit under section 45-865 in Schedule 1 of TAA 1953 for that income year, (the <strong>721-25(1A) Adjusted Tax-Related Liability</strong>).</li>
+<li>The 721-25(1A) Adjusted Tax-Related Liability will be allocated between each Group Member in proportion to the amount which that Group Member's Net Adjusted Income Tax Contribution Amount bears to the aggregate Net Adjusted Income Tax Contribution Amounts of all Group Members.</li>
+<li>The amount so allocated to each Group Member is its Contribution Amount.</li>
+</ol>
+`}
+
+<h3>Tax-Related Liability: Items 30, 32, 35 subsection 721-10(2) of ITAA 1997 (PAYG instalments)</h3>
+<p><strong>Allocation Principles:</strong> The Tax-Related Liability will be allocated between each Group Member in proportion to their Income Tax Instalment Incomes for the relevant Tax-Related Period as determined in accordance with section 45-120 of Schedule 1 of TAA 1953.</p>
+
+<h3>Tax-Related Liability: Items 40, 45, 50, 55, 60, 65, 70 (interest charges and penalties)</h3>
+<p><strong>Allocation Principles:</strong> The Tax-Related Liability will be allocated between each Group Member based upon the allocation that was adopted for the underlying Item to which the relevant interest charge or penalty relates.</p>
+
+<h3>Tax-Related Liability: Item 115 of section 721-10(2) of the ITAA 1997 (diverted profits tax)</h3>
+<p><strong>Allocation Principles:</strong> The DPT Group Liability will be allocated based on the DPT Base Amount for the DPT Tax Benefit that would have been obtained by each Group Member, allocated pro-rata to their respective DPT Base Amounts.</p>
+
+<div class="page-break"></div>
+
+<h1>Schedule 3 -- Accession Agreement</h1>
+
+<h2>Date</h2>
+<p>[Insert Date]</p>
+
+<h2>Parties</h2>
+<table>
+<tr><th>Name</th><td>[Full name of acceding party]</td></tr>
+<tr><th>ABN</th><td>[Insert]</td></tr>
+<tr><th>Description</th><td>Acceding Party</td></tr>
+<tr><th>Notice details</th><td>[Insert Address]<br>E-mail: [Insert e-mail address]<br>Attention: [Insert]</td></tr>
+</table>
+
+<table>
+<tr><th>Name</th><td>${escapeXml(data.headCompanyName)}</td></tr>
+<tr><th>ABN</th><td>${escapeXml(data.headCompanyABN)}</td></tr>
+<tr><th>Description</th><td>Head Company</td></tr>
+<tr><th>Notice details</th><td>${escapeXml(data.headCompanyAddress)}<br>E-mail: ${escapeXml(data.headCompanyEmail)}<br>Attention: ${escapeXml(data.companySecretary)}</td></tr>
+</table>
+
+<table>
+<tr><th>Name</th><td>Each Contributing Member as defined in the TSA</td></tr>
+</table>
+
+<h2>Recitals</h2>
+<p><strong>A.</strong> On [date], the Head Company entered into a Tax Sharing Agreement (TSA) with persons that were at that date Members of the Head Company's Consolidated Group.</p>
+<p><strong>B.</strong> The Acceding Party has since that date become a Member of the Head Company's Consolidated Group.</p>
+<p><strong>C.</strong> The Head Company (on its own behalf and as agent for each of the other parties to the TSA) and the Acceding Party have agreed that the Acceding Party should become a party to the TSA on the terms set out in this agreement.</p>
+
+<h2>Agreed Terms</h2>
+
+<h3>1. Interpretation</h3>
+<p>Where a word, phrase or acronym is used in this agreement and is defined or assigned a meaning in the TSA, the word, phrase or acronym has the same meaning in this agreement as it does in the TSA.</p>
+
+<h3>2. Consideration</h3>
+<p>In consideration of the mutual promises made in this agreement, the Head Company (on its own behalf and as agent for each other party to the TSA) and the Acceding Party agree to be bound by the terms of this agreement.</p>
+
+<h3>3. Acceding Party to be bound</h3>
+<p>The Acceding Party confirms that it has been supplied with a copy of the TSA and agrees and covenants with all present parties to the TSA (whether original or by accession) to observe, perform and be bound by all the terms of the TSA so that the Acceding Party is deemed from the date of this agreement to be a Contributing Member as defined in, and for the purposes of, the TSA.</p>
+
+<h3>4. Undertaking</h3>
+<p>The Head Company and the Acceding Party undertake to perform their respective duties and obligations under the TSA in respect to Group Liabilities with a Due Date after the date of this agreement as if the Acceding Party had been a party to the TSA from the date on which the Acceding Party becomes eligible to join the consolidated group of which the Head Company is the head company.</p>
+
+<h3>5. Representations and warranties</h3>
+<p>The Acceding Party represents and warrants to the Parties that it has the power and authority to enter into this agreement and that this agreement is valid, binding and enforceable against it in accordance with its terms.</p>
+
+<h3>6. Governing Law</h3>
+<p>This agreement is governed by the laws applicable in ${escapeXml(data.jurisdiction)}.</p>
+
+<p><strong>Executed as an agreement.</strong></p>
+
+<div class="page-break"></div>
+
+<h1>Schedule 4 -- Release Agreement</h1>
+
+<h2>Date</h2>
+<p>[Insert Date]</p>
+
+<h2>Parties</h2>
+<table>
+<tr><th>Name</th><td>[Full name of exiting party]</td></tr>
+<tr><th>ABN</th><td>[Insert]</td></tr>
+<tr><th>Description</th><td>Exiting Party</td></tr>
+<tr><th>Notice details</th><td>[Insert Address]<br>E-mail: [Insert e-mail address]<br>Attention: [Insert]</td></tr>
+</table>
+
+<table>
+<tr><th>Name</th><td>${escapeXml(data.headCompanyName)}</td></tr>
+<tr><th>ABN</th><td>${escapeXml(data.headCompanyABN)}</td></tr>
+<tr><th>Description</th><td>Head Company</td></tr>
+<tr><th>Notice details</th><td>${escapeXml(data.headCompanyAddress)}<br>E-mail: ${escapeXml(data.headCompanyEmail)}<br>Attention: ${escapeXml(data.companySecretary)}</td></tr>
+</table>
+
+<table>
+<tr><th>Name</th><td>Each Contributing Member as defined in the TSA</td></tr>
+</table>
+
+<h2>Recitals</h2>
+<p><strong>A.</strong> On [date], the Head Company entered into a Tax Sharing Agreement (TSA) with persons that were at that date Members of the Head Company's Consolidated Group.</p>
+<p><strong>B.</strong> The Exiting Party will cease to be a Member of the Head Company's Consolidated Group on [date].</p>
+<p><strong>C.</strong> The Head Company (on its own behalf and as agent for each other party to the TSA) and the Exiting Party have agreed that the Exiting Party and the Head Company (and each other party to the TSA) will be released from certain obligations under the TSA on the terms set out in this agreement.</p>
+
+<h2>Agreed Terms</h2>
+
+<h3>1. Interpretation</h3>
+<p>Where a word, phrase or acronym is used in this agreement and is defined or assigned a meaning in the TSA, the word, phrase or acronym has the same meaning in this agreement as it does in the TSA.</p>
+
+<h3>2. Consideration</h3>
+<p>In consideration of the mutual promises made in this agreement, the Head Company (on its own behalf and as agent for each other party to the TSA) and the Exiting Party agree to be bound by the terms of this agreement.</p>
+
+<h3>3. Release</h3>
+<p>Subject to the terms of the TSA, the Head Company (on its own behalf and on behalf of other party to the TSA) by this agreement releases the Exiting Party from its obligations under the TSA that relate to any Tax-Related Period during which the Exiting Party is or was, for the whole of the Tax-Related Period, not part of the Consolidated Group.</p>
+<p>Subject to the terms of the TSA, the Exiting Party by this agreement releases the Head Company and each other party to the TSA from their respective obligations under the TSA that relate to any Tax-Related Period during which the Exiting Party is or was, for the whole of the Tax-Related Period, not part of the Consolidated Group.</p>
+<p>For the avoidance of doubt, this agreement does not release any party to the TSA from its obligations under the TSA that relate to any Tax-Related Period during which the Exiting Party was part of the Consolidated Group.</p>
+
+<h3>4. Clear Exit Payment</h3>
+<p>The Head Company confirms that the Exiting Party has paid its clear exit payment payable under clause 4 of the TSA prior to the date the Exiting Party ceased to be a Member of the Consolidated Group.</p>
+
+<h3>5. Governing Law</h3>
+<p>This agreement is governed by the laws applicable in ${escapeXml(data.jurisdiction)}.</p>
+
+<p><strong>Executed as an agreement.</strong></p>
+
+<div class="page-break"></div>
+
+<h1>Execution Pages</h1>
+
+<p><strong>Executed as an agreement</strong></p>
+
+<table style="border:none; margin-top: 24pt;">
+<tr style="border:none;">
+<td style="border:none; padding: 12pt; width: 50%; vertical-align: top;">
+<p><strong>SIGNED</strong> by <strong>${escapeXml(data.headCompanyName)}</strong> by two Directors or a Director and Secretary in accordance with section 127 of the <em>Corporations Act 2001</em> (Cth):</p>
+<p style="margin-top: 36pt;">_________________________________</p>
+<p>Signature of Director</p>
+<p style="margin-top: 24pt;">_________________________________</p>
+<p>Full Name of Signatory</p>
+<p style="margin-top: 24pt;">Date: ____________________________</p>
+</td>
+<td style="border:none; padding: 12pt; width: 50%; vertical-align: top;">
+<p>&nbsp;</p>
+<p style="margin-top: 36pt;">_________________________________</p>
+<p>Signature of Director/Secretary</p>
+<p style="margin-top: 24pt;">_________________________________</p>
+<p>Full Name of Signatory</p>
+<p style="margin-top: 24pt;">Date: ____________________________</p>
+</td>
+</tr>
+</table>
+
+${members.map(member => `
+<table style="border:none; margin-top: 24pt;">
+<tr style="border:none;">
+<td style="border:none; padding: 12pt; width: 50%; vertical-align: top;">
+<p><strong>SIGNED</strong> by <strong>${escapeXml(member.name)}</strong> by two Directors or a Director and Secretary in accordance with section 127 of the <em>Corporations Act 2001</em> (Cth):</p>
+<p style="margin-top: 36pt;">_________________________________</p>
+<p>Signature of Director</p>
+<p style="margin-top: 24pt;">_________________________________</p>
+<p>Full Name of Signatory</p>
+<p style="margin-top: 24pt;">Date: ____________________________</p>
+</td>
+<td style="border:none; padding: 12pt; width: 50%; vertical-align: top;">
+<p>&nbsp;</p>
+<p style="margin-top: 36pt;">_________________________________</p>
+<p>Signature of Director/Secretary</p>
+<p style="margin-top: 24pt;">_________________________________</p>
+<p>Full Name of Signatory</p>
+<p style="margin-top: 24pt;">Date: ____________________________</p>
+</td>
+</tr>
+</table>
+`).join('\n')}
+
+<div class="page-break"></div>
+
+<h1>Annexure A</h1>
+
+<p>Calculation Advices, Accession Agreements, Release Agreements or other documents pursuant to clause 3.5.</p>
+
+<p style="margin-top: 48pt; text-align: center;"><em>[This page is intentionally left blank and will be populated as documents are created]</em></p>
 
 </body>
 </html>`;
@@ -599,7 +1245,7 @@ ${members.map(m => `<tr><td>${m.name}</td><td>${m.abn}</td><td>${m.address}</td>
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `TSA_${data.headCompanyName.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().split('T')[0]}.doc`;
+            link.download = `TSA_Complete_${data.headCompanyName.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().split('T')[0]}.doc`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
